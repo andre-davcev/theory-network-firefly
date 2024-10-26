@@ -4,6 +4,7 @@ export enum ActionsLists {
   SetSubscriptions = '[Lists] Set Subscriptions',
   Filter = '[Lists] Filter',
   Page = '[Lists] Page',
+  TagSet = '[Lists] TagSet',
 
   SubscriptionToggle = '[Lists] Subscription Toggle',
   SubscriptionAdd = '[Lists] Subscription Add',

@@ -26,7 +26,8 @@
     <tn-tags
       [tags]="tagsLists$ | async"
       [colors]="Colors"
-      [active]="1"
+      [active]="tagIndex$ | async"
+      (select)="chipSelected($event)"
     ></tn-tags>
   </ion-toolbar>
 </ion-header>

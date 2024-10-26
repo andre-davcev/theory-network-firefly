@@ -17,6 +17,7 @@ import {
   ActionListsPage,
   ActionListsSubscriptionOnOff,
   ActionListsSubscriptionToggle,
+  ActionListsTagSet,
   Colors,
   IconType,
   Pages,
@@ -63,6 +64,7 @@ export class PageLists extends BaseComponent implements OnInit {
   @Select(StateUser.authenticated) authenticated$!: Observable<boolean>;
   @Select(StateLocation.permissionDenied) locationDenied$!: Observable<boolean>;
   @Select(StateTags.tagsLists) tagsLists$!: Observable<Array<Tag<TagList>>>;
+  @Select(StateLists.tagIndex) tagIndex$!: Observable<number>;
 
   // @ViewChild(IonSearchbar, { static: false })
   // private searchbar!: IonSearchbar;
@@ -307,6 +309,10 @@ export class PageLists extends BaseComponent implements OnInit {
     } else {
       this.store.dispatch(new ActionMobileAuthSelect());
     }
+  }
+
+  public chipSelected(tag: Tag<TagList>): void {
+    this.store.dispatch(new ActionListsTagSet(tag));
   }
   /*
     public filterChanged(event: any): void

@@ -1,8 +1,9 @@
 import { IonInfiniteScroll } from '@ionic/angular';
 
-import { ListType } from '../../../enums';
-
 import { SubscriptionPartial } from '@firefly/cloud';
+import { Tag } from '@theory/ionic';
+
+import { ListType, TagList } from '../../../enums';
 import { ActionsLists } from './lists.actions.enum';
 import { ListsFilter } from './lists.filter.model';
 
@@ -28,6 +29,11 @@ export class ActionListsFilter {
 export class ActionListsPage {
   static readonly type = ActionsLists.Page;
   constructor(public infiniteScroll?: IonInfiniteScroll) {}
+}
+
+export class ActionListsTagSet {
+  static readonly type = ActionsLists.TagSet;
+  constructor(public tag: Tag<TagList>) {}
 }
 
 export class ActionListsSubscriptionToggle {

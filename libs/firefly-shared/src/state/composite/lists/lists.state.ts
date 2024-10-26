@@ -6,7 +6,7 @@ import { switchMap, takeWhile, tap } from 'rxjs/operators';
 import { StreamList, SubscriptionPartial } from '@firefly/cloud';
 import { DocumentSnapshot } from '@theory/firebase';
 
-import { ListType, TagList } from '../../../enums';
+import { ListType, TagList, TagListDefault } from '../../../enums';
 import {
   ActionListsFilter,
   ActionListsPage,
@@ -16,12 +16,14 @@ import {
   ActionListsSubscriptionAdd,
   ActionListsSubscriptionOnOff,
   ActionListsSubscriptionRemove,
-  ActionListsSubscriptionToggle
+  ActionListsSubscriptionToggle,
+  ActionListsTagSet
 } from './lists.actions';
 import { StateListsModel } from './lists.state.model';
 import { StateListsOptions } from './lists.state.options';
 
 import { StateLocation } from '@theory/capacitor';
+import { Tag } from '@theory/ionic';
 import {
   ActionCityStreamAdd,
   ActionCityStreamFilter,
@@ -64,8 +66,22 @@ export class StateLists {
     return StateLists.filter(state).subscriptions;
   }
 
-  @Selector() static tag(state: StateListsModel): TagList {
+  @Selector() static tag(state: StateListsModel): Tag<TagList> | null {
     return state.tag;
+  }
+
+  @Selector([StateLists.tag]) static tagKey(
+    state: StateListsModel,
+    tag: Tag<TagList> | null
+  ): TagList {
+    return tag?.key || TagListDefault.Popular;
+  }
+
+  @Selector([StateLists.tag]) static tagIndex(
+    state: StateListsModel,
+    tag: Tag<TagList> | null
+  ): number {
+    return tag?.index || 0;
   }
 
   @Selector([
@@ -313,6 +329,14 @@ export class StateLists {
         infiniteScroll == null ? of(null) : from(infiniteScroll.complete())
       )
     );
+  }
+
+  @Action(ActionListsTagSet)
+  tagSet(
+    { patchState }: StateContext<StateListsModel>,
+    { tag }: ActionListsTagSet
+  ) {
+    patchState({ tag });
   }
 
   @Action(ActionListsSubscriptionToggle)

@@ -12,7 +12,7 @@ import {
 import { IonicModule } from '@ionic/angular';
 import { ModuleDirectiveElevation } from '@theory/google';
 import { ColorsDefault } from './constants';
-import { Tag, TagEvent } from './models';
+import { Tag } from './models';
 
 @Component({
   selector: 'tn-tags',
@@ -36,10 +36,10 @@ export class TagsComponent implements OnChanges {
   public active!: number | null;
 
   @Output()
-  public close: EventEmitter<TagEvent<string>> = new EventEmitter();
+  public close: EventEmitter<Tag<string>> = new EventEmitter();
 
   @Output()
-  public click: EventEmitter<TagEvent<string>> = new EventEmitter();
+  public select: EventEmitter<Tag<string>> = new EventEmitter();
 
   private closeClick: boolean = false;
 
@@ -48,7 +48,7 @@ export class TagsComponent implements OnChanges {
   }
 
   public ngOnChanges(changes: SimpleChanges): void {
-    if (changes['tags'].currentValue) {
+    if (changes['tags']?.currentValue) {
       const tagColors: Array<string> = this.colors;
       const tagColorCount: number = tagColors.length;
       let i: number = 0;
@@ -74,16 +74,16 @@ export class TagsComponent implements OnChanges {
     }
   }
 
-  public closeClicked(index: number, tag: Tag<string>): void {
+  public closeClicked(tag: Tag<string>): void {
     this.closeClick = true;
 
-    this.close.emit({ index, tag });
+    this.close.emit(tag);
   }
 
   public chipClicked(index: number, tag: Tag<string>): void {
     if (!this.closeClick) {
       this.active = index;
-      this.click.emit({ index, tag });
+      this.select.emit(tag);
     } else {
       this.closeClick = false;
     }
