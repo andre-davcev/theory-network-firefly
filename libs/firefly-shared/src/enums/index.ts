@@ -7,5 +7,7 @@ export * from './place-type.enum';
 export * from './repeat-type.enum';
 export * from './tag-event-default.enum';
 export * from './tag-event-type.enum';
+export * from './tag-event.enum';
 export * from './tag-list-default.enum';
+export * from './tag-list.enum';
 export * from './translation.enum';

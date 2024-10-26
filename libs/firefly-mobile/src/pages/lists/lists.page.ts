@@ -24,7 +24,8 @@ import {
   StateCalendar,
   StateList,
   StateLists,
-  StateUser
+  StateUser,
+  TagList
 } from '@firefly/shared';
 import { BaseComponent, CoreEnum } from '@theory/core';
 import { TimestampFormat } from '@theory/firebase';
@@ -61,7 +62,7 @@ export class PageLists extends BaseComponent implements OnInit {
   @Select(StateMobile.menuOpen) menuOpen$!: Observable<boolean>;
   @Select(StateUser.authenticated) authenticated$!: Observable<boolean>;
   @Select(StateLocation.permissionDenied) locationDenied$!: Observable<boolean>;
-  @Select(StateTags.tagsLists) tagsLists$!: Observable<Array<Tag>>;
+  @Select(StateTags.tagsLists) tagsLists$!: Observable<Array<Tag<TagList>>>;
 
   // @ViewChild(IonSearchbar, { static: false })
   // private searchbar!: IonSearchbar;

@@ -1,6 +1,6 @@
 import { Tag } from './tag.model';
 
-export interface TagEvent {
+export interface TagEvent<T> {
   index: number;
-  tag: Tag;
+  tag: Tag<T>;
 }

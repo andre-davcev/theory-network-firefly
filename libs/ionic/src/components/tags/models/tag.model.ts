@@ -1,7 +1,7 @@
-export interface Tag {
+export interface Tag<T> {
   display: string;
   index?: number;
-  key?: string;
+  key?: T;
   disabled?: boolean;
   color?: string;
 }

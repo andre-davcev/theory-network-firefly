@@ -5,7 +5,13 @@ import { tap } from 'rxjs/operators';
 
 import { Tag } from '@theory/ionic';
 
-import { TagEventDefault, TagEventType, TagListDefault } from '../../../enums';
+import {
+  TagEvent,
+  TagEventDefault,
+  TagEventType,
+  TagList,
+  TagListDefault
+} from '../../../enums';
 import { StateUser } from '../../document';
 import { ActionTagsGet } from './tags.actions';
 import { StateTagsModel, StateTagsOptions } from './tags.state.model';
@@ -17,11 +23,11 @@ export class StateTags {
     state: StateTagsModel,
     isUser: boolean,
     isPublisher: boolean
-  ): Array<Tag> {
+  ): Array<Tag<TagEvent>> {
     return isUser && isPublisher
       ? state.tagsEvents
       : state.tagsEvents.filter(
-          (tag: Tag) =>
+          (tag: Tag<TagEvent>) =>
             (isPublisher || tag.key !== TagEventDefault.Published) &&
             (isUser || tag.key !== TagEventDefault.Saved)
         );
@@ -31,11 +37,11 @@ export class StateTags {
     state: StateTagsModel,
     isUser: boolean,
     isPublisher: boolean
-  ): Array<Tag> {
+  ): Array<Tag<TagList>> {
     return isUser && isPublisher
       ? state.tagsLists
       : state.tagsLists.filter(
-          (tag: Tag) =>
+          (tag: Tag<TagList>) =>
             (isPublisher || tag.key !== TagListDefault.Published) &&
             (isUser || tag.key !== TagListDefault.Subscribed)
         );
@@ -53,20 +59,20 @@ export class StateTags {
 
     return this.translate.get(tagKeys).pipe(
       tap((translations: Record<string, string>) => {
-        const tagsEvents: Array<Tag> = [
+        const tagsEvents: Array<Tag<TagEvent>> = [
           ...Object.values(TagEventDefault),
           ...Object.values(TagEventType)
-        ].map((key: string, index: number) => ({
+        ].map((key: TagEvent, index: number) => ({
           key,
           index,
           display: translations[`tag.${key}`],
           disabled: false
         }));
 
-        const tagsLists: Array<Tag> = [
+        const tagsLists: Array<Tag<TagList>> = [
           ...Object.values(TagListDefault),
           ...Object.values(TagEventType)
-        ].map((key: string, index: number) => ({
+        ].map((key: TagList, index: number) => ({
           key,
           index,
           display: translations[`tag.${key}`],

@@ -6,7 +6,7 @@ import { switchMap, takeWhile, tap } from 'rxjs/operators';
 import { StreamList, SubscriptionPartial } from '@firefly/cloud';
 import { DocumentSnapshot } from '@theory/firebase';
 
-import { ListType } from '../../../enums';
+import { ListType, TagList } from '../../../enums';
 import {
   ActionListsFilter,
   ActionListsPage,
@@ -62,6 +62,10 @@ export class StateLists {
     state: StateListsModel
   ): Record<string, SubscriptionPartial> {
     return StateLists.filter(state).subscriptions;
+  }
+
+  @Selector() static tag(state: StateListsModel): TagList {
+    return state.tag;
   }
 
   @Selector([

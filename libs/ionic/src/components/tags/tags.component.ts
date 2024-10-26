@@ -28,7 +28,7 @@ export class TagsComponent implements OnChanges {
   public closeIcon: string = 'close-circle';
 
   @Input()
-  public tags: Array<Tag> | null = [];
+  public tags: Array<Tag<string>> | null = [];
 
   @Input() colors: Array<string> = ColorsDefault;
 
@@ -36,10 +36,10 @@ export class TagsComponent implements OnChanges {
   public active!: number | null;
 
   @Output()
-  public close: EventEmitter<TagEvent> = new EventEmitter();
+  public close: EventEmitter<TagEvent<string>> = new EventEmitter();
 
   @Output()
-  public click: EventEmitter<TagEvent> = new EventEmitter();
+  public click: EventEmitter<TagEvent<string>> = new EventEmitter();
 
   private closeClick: boolean = false;
 
@@ -54,7 +54,7 @@ export class TagsComponent implements OnChanges {
       let i: number = 0;
 
       // Assign colors unless defined
-      this.tags = (this.tags || []).map((tag: Tag, index: number) => {
+      this.tags = (this.tags || []).map((tag: Tag<string>, index: number) => {
         const colorDefined: boolean = tag.color != null;
 
         tag.disabled = tag.disabled || false;
@@ -74,13 +74,13 @@ export class TagsComponent implements OnChanges {
     }
   }
 
-  public closeClicked(index: number, tag: Tag): void {
+  public closeClicked(index: number, tag: Tag<string>): void {
     this.closeClick = true;
 
     this.close.emit({ index, tag });
   }
 
-  public chipClicked(index: number, tag: Tag): void {
+  public chipClicked(index: number, tag: Tag<string>): void {
     if (!this.closeClick) {
       this.active = index;
       this.click.emit({ index, tag });
@@ -89,7 +89,7 @@ export class TagsComponent implements OnChanges {
     }
   }
 
-  public background(tag: Tag): string {
+  public background(tag: Tag<string>): string {
     return `var(--ion-color-${tag.color}-tint)`;
   }
 
