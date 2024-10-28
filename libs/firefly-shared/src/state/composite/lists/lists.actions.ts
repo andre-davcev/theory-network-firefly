@@ -3,14 +3,10 @@ import { IonInfiniteScroll } from '@ionic/angular';
 import { SubscriptionPartial } from '@firefly/cloud';
 import { Tag } from '@theory/ionic';
 
-import { ListType, TagList } from '../../../enums';
+import { TagList } from '../../../enums';
 import { ActionsLists } from './lists.actions.enum';
 import { ListsFilter } from './lists.filter.model';
 
-export class ActionListsSetType {
-  static readonly type = ActionsLists.SetType;
-  constructor(public type: ListType) {}
-}
 export class ActionListsSetVirtual {
   static readonly type = ActionsLists.SetVirtual;
   constructor(public virtual: boolean) {}

@@ -1,17 +1,15 @@
 import { Injectable } from '@angular/core';
 import { Query } from '@angular/fire/compat/firestore';
-import { Action, Selector, State, StateContext, Store } from '@ngxs/store';
+import { Action, State, StateContext, Store } from '@ngxs/store';
 import { Observable, of } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 
-import { Collection, List, SubscriptionPartial } from '@firefly/cloud';
+import { Collection, List } from '@firefly/cloud';
 import { ImageType } from '@theory/core';
 import { ServiceStorage } from '@theory/firebase';
 import { StateQuery } from '@theory/ngxs';
 
-import { ListType } from '../../../enums';
 import { ServiceLists } from '../../../services';
-import { ListsFilter } from '../../composite/lists/lists.filter.model';
 import {
   ActionAppLoadingHide,
   ActionAppLoadingShow
@@ -32,21 +30,6 @@ import { StateUserListsOptions } from './user-lists.state.options';
 @State<StateUserListsModel>(StateUserListsOptions)
 @Injectable()
 export class StateUserLists extends StateQuery<List, StateUserListsModel> {
-  @Selector() static filter(state: StateUserListsModel): ListsFilter {
-    return state.filter;
-  }
-  @Selector() static type(state: StateUserListsModel): ListType {
-    return StateUserLists.filter(state).type;
-  }
-  @Selector() static virtual(state: StateUserListsModel): boolean {
-    return StateUserLists.filter(state).virtual;
-  }
-  @Selector() static subscriptions(
-    state: StateUserListsModel
-  ): Record<string, SubscriptionPartial> {
-    return StateUserLists.filter(state).subscriptions;
-  }
-
   constructor(
     private store: Store,
     private service: ServiceLists,
@@ -125,8 +108,6 @@ export class StateUserLists extends StateQuery<List, StateUserListsModel> {
     const { dispatch, getState, patchState } = context;
 
     const state: StateUserListsModel = getState();
-
-    filter = filter || StateUserLists.filter(state);
 
     patchState({ filter });
 

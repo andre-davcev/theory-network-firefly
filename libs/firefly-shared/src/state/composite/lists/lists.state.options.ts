@@ -1,6 +1,6 @@
 import { StoreOptions } from '@ngxs/store/src/symbols';
 
-import { ListType } from '../../../enums';
+import { TagListDefault } from '../../../enums';
 import { StateListsModel } from './lists.state.model';
 
 export const StateListsOptions: StoreOptions<StateListsModel> = {
@@ -8,9 +8,9 @@ export const StateListsOptions: StoreOptions<StateListsModel> = {
 
   defaults: {
     filter: {
-      type: ListType.Unsubscribed,
       virtual: false,
-      subscriptions: {}
+      subscriptions: {},
+      tag: TagListDefault.Popular
     },
     tag: null
   }

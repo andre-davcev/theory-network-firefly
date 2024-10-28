@@ -6,12 +6,11 @@ import { switchMap, takeWhile, tap } from 'rxjs/operators';
 import { StreamList, SubscriptionPartial } from '@firefly/cloud';
 import { DocumentSnapshot } from '@theory/firebase';
 
-import { ListType, TagList, TagListDefault } from '../../../enums';
+import { TagList, TagListDefault } from '../../../enums';
 import {
   ActionListsFilter,
   ActionListsPage,
   ActionListsSetSubscriptions,
-  ActionListsSetType,
   ActionListsSetVirtual,
   ActionListsSubscriptionAdd,
   ActionListsSubscriptionOnOff,
@@ -54,9 +53,6 @@ export class StateLists {
   @Selector() static filter(state: StateListsModel): ListsFilter {
     return state.filter;
   }
-  @Selector() static type(state: StateListsModel): ListType {
-    return StateLists.filter(state).type;
-  }
   @Selector() static virtual(state: StateListsModel): boolean {
     return StateLists.filter(state).virtual;
   }
@@ -70,11 +66,11 @@ export class StateLists {
     return state.tag;
   }
 
-  @Selector([StateLists.tag]) static tagKey(
+  @Selector([StateLists.filter]) static tagKey(
     state: StateListsModel,
-    tag: Tag<TagList> | null
+    filter: ListsFilter
   ): TagList {
-    return tag?.key || TagListDefault.Popular;
+    return filter.tag;
   }
 
   @Selector([StateLists.tag]) static tagIndex(
@@ -85,24 +81,25 @@ export class StateLists {
   }
 
   @Selector([
+    StateLists.tagKey,
     StateCityStream.data(),
     StateUserSubscriptions.data(),
     StateUserLists.data()
   ])
   public static data(
     state: StateListsModel,
+    key: TagList,
     dataUnsubscribed: Array<StreamList>,
     dataSubscribed: Array<StreamList>,
     dataCreated: Array<StreamList>
   ): Array<StreamList> {
-    const type: ListType = StateLists.type(state);
     const subscriptions: Record<string, SubscriptionPartial> =
       StateLists.subscriptions(state);
 
     const data: Array<StreamList> =
-      type === ListType.Unsubscribed
+      key === TagListDefault.Popular
         ? dataUnsubscribed
-        : type === ListType.Subscribed
+        : key === TagListDefault.Subscribed
         ? dataSubscribed
         : dataCreated;
 
@@ -114,95 +111,100 @@ export class StateLists {
   }
 
   @Selector([
+    StateLists.tagKey,
     StateCityStream.snapshotLookup(),
     StateUserSubscriptions.snapshotLookup(),
     StateUserLists.snapshotLookup()
   ])
   public static snapshotLookup(
     state: StateListsModel,
+    key: TagList,
     lookupUnsubscribed: Record<string, DocumentSnapshot<StreamList>>,
     lookupSubscribed: Record<string, DocumentSnapshot<StreamList>>,
     lookupCreated: Record<string, DocumentSnapshot<StreamList>>
   ): Record<string, DocumentSnapshot<StreamList>> {
-    const type: ListType = StateLists.type(state);
-
-    return type === ListType.Unsubscribed
+    return key === TagListDefault.Popular
       ? lookupUnsubscribed
-      : type === ListType.Subscribed
+      : key === TagListDefault.Subscribed
       ? lookupSubscribed
       : lookupCreated;
   }
 
   @Selector([
+    StateLists.tagKey,
     StateCityStream.dataLookup(),
     StateUserSubscriptions.dataLookup(),
     StateUserLists.dataLookup()
   ])
   public static dataLookup(
     state: StateListsModel,
+    key: TagList,
     lookupUnsubscribed: Record<string, StreamList>,
     lookupSubscribed: Record<string, StreamList>,
     lookupCreated: Record<string, StreamList>
   ): Record<string, StreamList> {
-    const type: ListType = StateLists.type(state);
-
-    return type === ListType.Unsubscribed
+    return key === TagListDefault.Popular
       ? lookupUnsubscribed
-      : type === ListType.Subscribed
+      : key === TagListDefault.Subscribed
       ? lookupSubscribed
       : lookupCreated;
   }
 
   @Selector([
+    StateLists.tagKey,
     StateCityStream.finishedPaging(),
     StateUserSubscriptions.finishedPaging(),
     StateUserLists.finishedPaging()
   ])
   public static pageFinished(
     state: StateListsModel,
+    key: TagList,
     finishedUnsubscribed: boolean,
     finishedSubscribed: boolean,
     finishedCreated: boolean
   ): boolean {
-    const type: ListType = StateLists.type(state);
-
-    return type === ListType.Unsubscribed
+    return key === TagListDefault.Popular
       ? finishedSubscribed
-      : type === ListType.Subscribed
+      : key === TagListDefault.Subscribed
       ? finishedUnsubscribed
       : finishedCreated;
   }
 
   @Selector([
+    StateLists.tagKey,
     StateCityStream.data(),
     StateUserSubscriptions.data(),
     StateUserLists.data()
   ])
   public static found(
     state: StateListsModel,
+    key: TagList,
     dataUnsubscribed: Array<StreamList>,
     dataSubscribed: Array<StreamList>,
     dataCreated: Array<StreamList>
   ): boolean {
     return (
-      StateLists.data(state, dataUnsubscribed, dataSubscribed, dataCreated)
+      StateLists.data(state, key, dataUnsubscribed, dataSubscribed, dataCreated)
         .length > 0
     );
   }
 
   @Selector([
+    StateLists.tagKey,
     StateCityStream.data(),
     StateUserSubscriptions.data(),
     StateUserLists.data()
   ])
   public static empty(
     state: StateListsModel,
+    key: TagList,
     dataUnsubscribed: Array<StreamList>,
     dataSubscribed: Array<StreamList>,
     dataCreated: Array<StreamList>
   ): boolean {
     return !StateLists.found(
       state,
+      key,
       dataUnsubscribed,
       dataSubscribed,
       dataCreated
@@ -214,34 +216,35 @@ export class StateLists {
     return isPublisher;
   }
 
-  @Selector([StateLocation.permissionDenied])
+  @Selector([StateLists.tagKey, StateLocation.permissionDenied])
   static emptyMessage(
     state: StateListsModel,
+    key: TagList,
     permissionDenied: boolean
   ): string {
-    const type: ListType = StateLists.type(state);
-
     return permissionDenied
       ? 'page.stream.empty.locationDenied'
       : StateLists.virtual(state)
       ? 'page.stream.empty.virtual'
-      : type === ListType.Unsubscribed
+      : key === TagListDefault.Popular
       ? 'page.stream.empty.unsubscribed'
-      : type === ListType.Subscribed
+      : key === TagListDefault.Subscribed
       ? 'page.stream.empty.subscribed'
       : 'page.stream.empty.created';
   }
 
   constructor(private store: Store) {}
 
-  @Action(ActionListsSetType)
-  setType(
-    { getState, dispatch }: StateContext<StateListsModel>,
-    { type }: ActionListsSetType
+  @Action(ActionListsTagSet)
+  tagSet(
+    { dispatch, getState, patchState }: StateContext<StateListsModel>,
+    { tag }: ActionListsTagSet
   ) {
     const filter: ListsFilter = StateLists.filter(getState());
 
-    filter.type = type;
+    filter.tag = tag.key as TagList;
+
+    patchState({ tag });
 
     return dispatch(new ActionListsFilter(filter));
   }
@@ -265,14 +268,14 @@ export class StateLists {
   ) {
     const state: StateListsModel = getState();
     const filter: ListsFilter = StateLists.filter(state);
-    const type: ListType = StateLists.type(state);
+    const key: TagList = this.store.selectSnapshot(StateLists.tagKey);
 
     subscriptions = subscriptions || {};
 
     filter.subscriptions = subscriptions;
 
     return dispatch(
-      type === ListType.Unsubscribed
+      key === TagListDefault.Popular
         ? new ActionCityStreamSubscriptionsSet(subscriptions)
         : new ActionListsFilter(filter)
     ).pipe(
@@ -300,28 +303,28 @@ export class StateLists {
   ) {
     filter = filter || StateLists.filter(getState());
 
-    const type: ListType = filter.type;
+    const tag: TagList = filter.tag;
 
     return dispatch(
-      type === ListType.Unsubscribed
-        ? new ActionCityStreamFilter(filter)
-        : type === ListType.Subscribed
+      tag === TagListDefault.Subscribed
         ? new ActionUserSubscriptionsFilter(filter)
-        : new ActionUserListsFilter(filter)
+        : tag === TagListDefault.Published
+        ? new ActionUserListsFilter(filter)
+        : new ActionCityStreamFilter(filter)
     ).pipe(tap(() => patchState({ filter })));
   }
 
   @Action(ActionListsPage)
   page(
-    { dispatch, getState }: StateContext<StateListsModel>,
+    { dispatch }: StateContext<StateListsModel>,
     { infiniteScroll }: ActionListsPage
   ) {
-    const type: ListType = StateLists.type(getState());
+    const key: TagList = this.store.selectSnapshot(StateLists.tagKey);
 
     return dispatch(
-      type === ListType.Unsubscribed
+      key === TagListDefault.Popular
         ? new ActionCityStreamGet()
-        : type === ListType.Subscribed
+        : key === TagListDefault.Subscribed
         ? new ActionUserSubscriptionsGet()
         : new ActionUserListsGet()
     ).pipe(
@@ -329,14 +332,6 @@ export class StateLists {
         infiniteScroll == null ? of(null) : from(infiniteScroll.complete())
       )
     );
-  }
-
-  @Action(ActionListsTagSet)
-  tagSet(
-    { patchState }: StateContext<StateListsModel>,
-    { tag }: ActionListsTagSet
-  ) {
-    patchState({ tag });
   }
 
   @Action(ActionListsSubscriptionToggle)

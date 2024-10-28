@@ -12,7 +12,6 @@ import { ImageType } from '@theory/core';
 import { ServiceStorage } from '@theory/firebase';
 import { StateChild } from '@theory/ngxs';
 
-import { ListType } from '../../../enums';
 import { ServiceSubscriptions } from '../../../services';
 import { ListsFilter } from '../../composite/lists/lists.filter.model';
 import {
@@ -40,9 +39,6 @@ export class StateUserSubscriptions extends StateChild<
 > {
   @Selector() static filter(state: StateUserSubscriptionsModel): ListsFilter {
     return state.filter;
-  }
-  @Selector() static type(state: StateUserSubscriptionsModel): ListType {
-    return StateUserSubscriptions.filter(state).type;
   }
   @Selector() static virtual(state: StateUserSubscriptionsModel): boolean {
     return StateUserSubscriptions.filter(state).virtual;

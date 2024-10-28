@@ -1,6 +1,5 @@
 export * from './color.enum';
 export * from './event-type.enum';
-export * from './list-type.enum';
 export * from './merge-type.enum';
 export * from './pages.enum';
 export * from './place-type.enum';

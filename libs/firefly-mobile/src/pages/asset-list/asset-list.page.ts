@@ -23,12 +23,13 @@ import {
   ActionListPatchMetadata,
   ActionListSave,
   ActionUserEventsGetData,
-  ListType,
   Pages,
   StateApp,
   StateList,
   StateLists,
   StateUserEvents,
+  TagList,
+  TagListDefault,
   Translation
 } from '@firefly/shared';
 import {
@@ -106,7 +107,7 @@ export class PageAssetList extends BaseComponent implements OnInit {
   }
 
   public save(): void {
-    const listType: ListType = this.store.selectSnapshot(StateLists.type);
+    const tagKey: TagList = this.store.selectSnapshot(StateLists.tagKey);
     const isNew: boolean = this.store.selectSnapshot(StateList.isNew());
 
     this.translate
@@ -140,7 +141,7 @@ export class PageAssetList extends BaseComponent implements OnInit {
       )
       .subscribe((message: string) => {
         this.store.dispatch(new ActionMobileToast(message));
-        if (listType === ListType.Created)
+        if (tagKey === TagListDefault.Published)
           this.store.dispatch(
             new Navigate(this.store.selectSnapshot(StateApp.homePath))
           );

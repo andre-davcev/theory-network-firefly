@@ -3,7 +3,7 @@ import { StoreOptions } from '@ngxs/store/src/symbols';
 import { OrderBy } from '@theory/firebase';
 import { PageSize } from '@theory/ngxs';
 
-import { ListType } from '../../../enums';
+import { TagListDefault } from '../../../enums';
 import { StateUserListsModel } from './user-lists.state.model';
 
 export const StateUserListsOptions: StoreOptions<StateUserListsModel> = {
@@ -24,9 +24,9 @@ export const StateUserListsOptions: StoreOptions<StateUserListsModel> = {
     data: [],
 
     filter: {
-      type: ListType.Unsubscribed,
       virtual: false,
-      subscriptions: {}
+      subscriptions: {},
+      tag: TagListDefault.Popular
     }
   }
 };

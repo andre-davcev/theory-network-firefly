@@ -7,7 +7,6 @@ import { ImageType } from '@theory/core';
 import { ServiceStorage } from '@theory/firebase';
 import { StateChild } from '@theory/ngxs';
 
-import { ListType } from '../../../enums';
 import { ServiceStreams } from '../../../services';
 import { ListsFilter } from '../../composite/lists/lists.filter.model';
 import {
@@ -33,9 +32,6 @@ export class StateCityStream extends StateChild<
 > {
   @Selector() static filter(state: StateCityStreamModel): ListsFilter {
     return state.filter;
-  }
-  @Selector() static type(state: StateCityStreamModel): ListType {
-    return StateCityStream.filter(state).type;
   }
   @Selector() static virtual(state: StateCityStreamModel): boolean {
     return StateCityStream.filter(state).virtual;

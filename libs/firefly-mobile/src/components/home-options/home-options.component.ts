@@ -1,16 +1,14 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { PopoverController } from '@ionic/angular';
 import { Select, Store } from '@ngxs/store';
-import { Observable, from } from 'rxjs';
+import { Observable, from, of } from 'rxjs';
 import { delay, switchMap } from 'rxjs/operators';
 
 import {
   ActionCalendarSetType,
   ActionCalendarSetVirtual,
-  ActionListsSetType,
   ActionListsSetVirtual,
   EventType,
-  ListType,
   StateUser
 } from '@firefly/shared';
 
@@ -23,10 +21,8 @@ import {
 export class ComponentHomeOptions {
   @Select(StateUser.isPublisher) isPublisher$!: Observable<boolean>;
 
-  public ListType: any = ListType;
   public EventType: any = EventType;
 
-  @Input() listType!: ListType;
   @Input() eventType!: EventType;
   @Input() isStream!: boolean;
   @Input() virtual!: boolean;
@@ -35,7 +31,7 @@ export class ComponentHomeOptions {
 
   public filterChanged(event: CustomEvent): void {
     const action: any = this.isStream
-      ? new ActionListsSetType(event.detail.value)
+      ? of(null)
       : new ActionCalendarSetType(event.detail.value);
 
     this.store

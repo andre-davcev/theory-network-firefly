@@ -1,9 +1,9 @@
 import { SubscriptionPartial } from '@firefly/cloud';
 
-import { ListType } from '../../../enums';
+import { TagList } from '../../../enums';
 
 export interface ListsFilter {
-  type: ListType;
+  tag: TagList;
   virtual: boolean;
   subscriptions: Record<string, SubscriptionPartial>;
 }

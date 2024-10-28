@@ -4,7 +4,7 @@ import { TypeOf } from '@theory/core';
 import { OrderBy } from '@theory/firebase';
 import { PageSize } from '@theory/ngxs';
 
-import { ListType } from '../../../enums';
+import { TagListDefault } from '../../../enums';
 import { StateCityStreamModel } from './city-stream.state.model';
 
 export const StateCityStreamOptions: StoreOptions<StateCityStreamModel> = {
@@ -33,9 +33,9 @@ export const StateCityStreamOptions: StoreOptions<StateCityStreamModel> = {
     },
 
     filter: {
-      type: ListType.Unsubscribed,
       virtual: false,
-      subscriptions: {}
+      subscriptions: {},
+      tag: TagListDefault.Popular
     },
 
     subscriptionsNew: {},

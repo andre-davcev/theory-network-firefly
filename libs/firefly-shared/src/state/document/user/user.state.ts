@@ -37,7 +37,7 @@ import {
 import { User as FirebaseUser, UserCredential } from '@theory/firebase';
 import { StateDocument } from '@theory/ngxs';
 
-import { EventType, ListType } from '../../../enums';
+import { EventType, TagListDefault } from '../../../enums';
 import { ServiceUsers } from '../../../services';
 import { ActionNotificationsWatch } from '../../basic/notifications/notifications.actions';
 import { StateCityStream } from '../../child/city-stream/city-stream.state';
@@ -83,7 +83,7 @@ import { ActionCalendarSetType } from '../../composite/calendar/calendar.actions
 import {
   ActionListsPage,
   ActionListsSetSubscriptions,
-  ActionListsSetType
+  ActionListsTagSet
 } from '../../composite/lists/lists.actions';
 import { StateApp } from '../app/app.state';
 import { StateCity } from '../city/city.state';
@@ -587,7 +587,7 @@ export class StateUser
     return of(this.auth.signOut()).pipe(
       switchMap(() =>
         dispatch([
-          new ActionListsSetType(ListType.Unsubscribed),
+          new ActionListsTagSet({ index: 0, key: TagListDefault.Popular }),
           new ActionCalendarSetType(EventType.Upcoming)
         ])
       ),
@@ -642,7 +642,7 @@ export class StateUser
       filter(() => !isPublisher),
       switchMap(() =>
         dispatch([
-          new ActionListsSetType(ListType.Unsubscribed),
+          new ActionListsTagSet({ index: 0, key: TagListDefault.Popular }),
           new ActionCalendarSetType(EventType.Upcoming)
         ])
       )

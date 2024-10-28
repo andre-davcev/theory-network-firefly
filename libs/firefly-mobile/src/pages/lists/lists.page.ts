@@ -145,7 +145,6 @@ export class PageLists extends BaseComponent implements OnInit {
     const popover: HTMLIonPopoverElement = await this.popover.create({
       component: ComponentHomeOptions,
       componentProps: {
-        listType: this.store.selectSnapshot(StateLists.type),
         eventType: this.store.selectSnapshot(StateCalendar.type),
         isStream,
         virtual: isStream

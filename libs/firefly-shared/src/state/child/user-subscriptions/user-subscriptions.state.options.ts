@@ -4,7 +4,7 @@ import { TypeOf } from '@theory/core';
 import { OrderBy } from '@theory/firebase';
 import { PageSize } from '@theory/ngxs';
 
-import { ListType } from '../../../enums';
+import { TagListDefault } from '../../../enums';
 import { StateUserSubscriptionsModel } from './user-subscriptions.state.model';
 
 export const StateUserSubscriptionsOptions: StoreOptions<StateUserSubscriptionsModel> =
@@ -34,9 +34,9 @@ export const StateUserSubscriptionsOptions: StoreOptions<StateUserSubscriptionsM
       },
 
       filter: {
-        type: ListType.Unsubscribed,
         virtual: false,
-        subscriptions: {}
+        subscriptions: {},
+        tag: TagListDefault.Popular
       }
     }
   };

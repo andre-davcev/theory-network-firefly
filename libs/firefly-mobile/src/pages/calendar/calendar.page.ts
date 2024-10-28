@@ -25,7 +25,6 @@ import {
   IconType,
   Pages,
   StateCalendar,
-  StateLists,
   StateSearch,
   StateUser,
   Translation
@@ -185,7 +184,6 @@ export class PageCalendar extends BaseComponent {
     const popover: HTMLIonPopoverElement = await this.popover.create({
       component: ComponentHomeOptions,
       componentProps: {
-        listType: this.store.selectSnapshot(StateLists.type),
         eventType: this.store.selectSnapshot(StateCalendar.type),
         isStream: false,
         virtual: this.store.selectSnapshot(StateCalendar.virtual)
