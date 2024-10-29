@@ -9,4 +9,5 @@ export * from './tag-event-type.enum';
 export * from './tag-event.enum';
 export * from './tag-list-default.enum';
 export * from './tag-list.enum';
+export * from './tags.enum';
 export * from './translation.enum';

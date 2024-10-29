@@ -3,6 +3,7 @@
     <ion-title color="dark"> {{ 'page.stream.title' | translate}} </ion-title>
 
     <ion-buttons slot="end">
+      <!--
       <ion-button
         *ngIf="isUser$ | async"
         icon-only
@@ -11,6 +12,7 @@
       >
         <ion-icon name="options" color="dark" size="large"></ion-icon>
       </ion-button>
+-->
       <ion-button
         *ngIf="(locationDenied$ | async) === false"
         icon-only

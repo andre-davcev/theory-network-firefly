@@ -4,12 +4,12 @@ import { LoadingOptions } from '@ionic/core';
 import { RouterState, RouterStateModel } from '@ngxs/router-plugin';
 import {
   Action,
+  createSelector,
   NgxsOnInit,
   Selector,
   State,
   StateContext,
-  Store,
-  createSelector
+  Store
 } from '@ngxs/store';
 import { from, of } from 'rxjs';
 import { filter, map, switchMap, tap } from 'rxjs/operators';
@@ -17,7 +17,7 @@ import { filter, map, switchMap, tap } from 'rxjs/operators';
 import { RouterStateParams } from '@theory/ngxs';
 
 import { CoreUtil } from '@theory/core';
-import { Pages } from '../../../enums';
+import { Pages, PageTab } from '../../../enums';
 import {
   ActionAppLoadingHide,
   ActionAppLoadingShow,
@@ -47,6 +47,21 @@ export class StateApp implements NgxsOnInit {
     return state.tabPath;
   }
 
+  @Selector([StateApp.routerState]) static tab(
+    state: StateAppModel,
+    routerState: RouterStateParams
+  ): PageTab {
+    const url: string = routerState.url;
+    const parts: Array<string> = (url || '').split('/');
+    const token1: string = parts.length < 3 ? '' : parts[1];
+    const token2: string = parts.length < 3 ? '' : parts[2];
+
+    const tab: PageTab =
+      token1 === Pages.Tabs ? (token2 as PageTab) : Pages.NonTab;
+
+    return tab;
+  }
+
   public static onPage(page: Pages) {
     return createSelector(
       [StateApp.routerState],
@@ -62,22 +77,12 @@ export class StateApp implements NgxsOnInit {
     );
   }
 
-  public static onTab(
-    page: Pages.Events | Pages.Lists | Pages.Notifications | Pages.Calendar
-  ) {
-    return createSelector(
-      [StateApp.routerState],
-      (routerState: RouterStateParams) => {
-        const url: string = routerState.url;
-        const parts: Array<string> = (url || '').split('/');
-        const token1: string = parts.length < 3 ? '' : parts[1];
-        const token2: string = parts.length < 3 ? '' : parts[2];
+  public static onTab(page: PageTab) {
+    return createSelector([StateApp.tab], (tab: PageTab) => {
+      const onTab: boolean = tab === page;
 
-        const onTab: boolean = token1 === Pages.Tabs && token2 === page;
-
-        return onTab;
-      }
-    );
+      return onTab;
+    });
   }
 
   constructor(private store: Store, private loading: LoadingController) {}

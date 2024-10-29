@@ -8,6 +8,7 @@ export enum Pages {
 
   // MENU
   Tabs = 'tabs',
+  NonTab = 'non-tab',
   UserProfile = 'user-profile',
 
   // TAB > EVENTS
