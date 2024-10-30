@@ -21,19 +21,21 @@ import { StateNotificationsOptions } from './notifications.state.options';
 export class StateNotifications {
   constructor(private store: Store) {}
 
-  @Selector() static pushNotifications(
+  @Selector([StateNotifications]) static pushNotifications(
     state: StateNotificationsModel
   ): Array<PushNotification> {
     return state.notifications;
   }
-  @Selector() static pushNotification(
+  @Selector([StateNotifications]) static pushNotification(
     state: StateNotificationsModel
   ): PushNotification | null | undefined {
     return state.notification;
   }
 
-  @Selector() static hasPushNotifications(state: StateNotificationsModel) {
-    return state.notifications.length > 0;
+  @Selector([StateNotifications.pushNotifications]) static hasPushNotifications(
+    pushNotifications: Array<PushNotification>
+  ) {
+    return pushNotifications.length > 0;
   }
 
   @Action(ActionNotificationsWatch)

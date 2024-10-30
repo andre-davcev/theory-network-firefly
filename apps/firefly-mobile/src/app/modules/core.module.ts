@@ -85,33 +85,38 @@ export function createTranslateLoader(http: HttpClient) {
     AngularFirestoreModule,
     AngularFireStorageModule,
 
-    NgxsModule.forRoot([
-      StateDevice,
-      StateLocation,
-      StateLanguage,
-      StateMobile,
-      StateNotifications,
-      StateSearch,
-      StateStorage,
-      StateTags,
+    NgxsModule.forRoot(
+      [
+        StateDevice,
+        StateLocation,
+        StateLanguage,
+        StateMobile,
+        StateNotifications,
+        StateSearch,
+        StateStorage,
+        StateTags,
 
-      StateUser,
-      StateApp,
-      StateList,
-      StateEvent,
-      StateSubscription,
-      StateCity,
-      StateUserAlerts,
-      StateUserLists,
-      StateUserEvents,
-      StateCityStream,
-      StateUserSubscriptions,
-      StateUserProfile,
+        StateUser,
+        StateApp,
+        StateList,
+        StateEvent,
+        StateSubscription,
+        StateCity,
+        StateUserAlerts,
+        StateUserLists,
+        StateUserEvents,
+        StateCityStream,
+        StateUserSubscriptions,
+        StateUserProfile,
 
-      StateAlerts,
-      StateCalendar,
-      StateLists
-    ]),
+        StateAlerts,
+        StateCalendar,
+        StateLists
+      ],
+      {
+        selectorOptions: { injectContainerState: false }
+      }
+    ),
 
     NgxsRouterPluginModule.forRoot(),
     NgxsFormPluginModule.forRoot(),

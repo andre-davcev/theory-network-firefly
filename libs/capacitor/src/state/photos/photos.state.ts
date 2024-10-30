@@ -9,12 +9,16 @@ import { StatePhotosOptions } from './photos.state.options';
 @State<StatePhotosModel>(StatePhotosOptions)
 @Injectable()
 export class StatePhotos {
-  @Selector() static photos(state: StatePhotosModel): Array<MediaAsset> {
-    return state.photos == null ? [] : state.photos.medias;
+  @Selector([StatePhotos]) static photos(
+    state: StatePhotosModel
+  ): Array<MediaAsset> {
+    return state.photos?.medias || [];
   }
 
-  @Selector() static albums(state: StatePhotosModel): Array<MediaAlbum> {
-    return state.albums == null ? [] : state.albums.albums;
+  @Selector([StatePhotos]) static albums(
+    state: StatePhotosModel
+  ): Array<MediaAlbum> {
+    return state.albums?.albums || [];
   }
 
   @Action(ActionPhotosGet)

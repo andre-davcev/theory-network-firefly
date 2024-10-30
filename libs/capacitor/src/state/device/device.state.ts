@@ -18,35 +18,39 @@ import { StateDeviceOptions } from './device.state.options';
 @State<StateDeviceModel>(StateDeviceOptions)
 @Injectable()
 export class StateDevice {
-  @Selector() static platform(state: StateDeviceModel): Platform {
+  @Selector([StateDevice]) static platform(state: StateDeviceModel): Platform {
     return state.platform;
   }
-  @Selector() static loading(state: StateDeviceModel): boolean {
+  @Selector([StateDevice]) static loading(state: StateDeviceModel): boolean {
     return state.loading;
   }
 
-  @Selector() static device(state: StateDeviceModel): boolean {
+  @Selector([StateDevice]) static device(state: StateDeviceModel): boolean {
     return state.device;
   }
-  @Selector() static web(state: StateDeviceModel): boolean {
+  @Selector([StateDevice]) static web(state: StateDeviceModel): boolean {
     return !state.device;
   }
 
-  @Selector() static android(state: StateDeviceModel): boolean {
+  @Selector([StateDevice]) static android(state: StateDeviceModel): boolean {
     return state.android;
   }
-  @Selector() static ios(state: StateDeviceModel): boolean {
+  @Selector([StateDevice]) static ios(state: StateDeviceModel): boolean {
     return state.ios;
   }
 
-  @Selector() static statusBar(state: StateDeviceModel): StyleOptions | null {
+  @Selector([StateDevice]) static statusBar(
+    state: StateDeviceModel
+  ): StyleOptions | null {
     return state.statusBar;
   }
-  @Selector() static statusBarVisible(state: StateDeviceModel): boolean {
+  @Selector([StateDevice]) static statusBarVisible(
+    state: StateDeviceModel
+  ): boolean {
     return state.statusBarVisible;
   }
 
-  ngxsOnInit(context: StateContext<StateDeviceModel>) {
+  public ngxsOnInit(context: StateContext<StateDeviceModel>): void {
     context.dispatch(new ActionDeviceInitialize());
   }
 

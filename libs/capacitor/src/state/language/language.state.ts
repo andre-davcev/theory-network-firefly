@@ -18,25 +18,27 @@ import { StateLanguageOptions } from './language.state.options';
 export class StateLanguage {
   constructor(private translate: TranslateService) {}
 
-  @Selector() static language(state: StateLanguageModel): string {
+  @Selector([StateLanguage]) static language(
+    state: StateLanguageModel
+  ): string {
     return state.language || 'en-us';
   }
 
-  @Selector() static error(state: StateLanguageModel): any {
+  @Selector([StateLanguage]) static error(state: StateLanguageModel): any {
     return state.error;
   }
 
-  @Selector() static errored(state: StateLanguageModel): boolean {
-    return state.error != null;
+  @Selector([StateLanguage.error]) static errored(error: any): boolean {
+    return error != null;
   }
 
-  @Selector() static languageIso639_1(state: StateLanguageModel): string {
-    const language: string = StateLanguage.language(state);
-
+  @Selector([StateLanguage.language]) static languageIso639_1(
+    language: string
+  ): string {
     return language.split('-')[0].toLowerCase();
   }
 
-  ngxsOnInit(context: StateContext<StateLanguageModel>) {
+  public ngxsOnInit(context: StateContext<StateLanguageModel>): void {
     context.dispatch([new ActionLanguageInitialize(), new ActionLanguageGet()]);
   }
 

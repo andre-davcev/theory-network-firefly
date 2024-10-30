@@ -17,55 +17,66 @@ import { StateLocationOptions } from './location.state.options';
 @State<StateLocationModel>(StateLocationOptions)
 @Injectable()
 export class StateLocation {
-  @Selector() static location(state: StateLocationModel): Position | null {
+  @Selector([StateLocation]) static location(
+    state: StateLocationModel
+  ): Position | null {
     return state.location;
   }
-  @Selector() static error(state: StateLocationModel): Error | null {
+  @Selector([StateLocation]) static error(
+    state: StateLocationModel
+  ): Error | null {
     return state.error;
   }
-  @Selector() static loading(state: StateLocationModel): boolean {
-    return state.location == null;
+  @Selector([StateLocation.location]) static loading(
+    location: Position | null
+  ): boolean {
+    return location == null;
   }
-  @Selector() static errored(state: StateLocationModel): boolean {
-    return state.error != null;
+  @Selector([StateLocation.error]) static errored(
+    error: Error | null
+  ): boolean {
+    return error != null;
   }
-  @Selector() static isValid(state: StateLocationModel): boolean {
-    return state.location != null && state.location.coords != null;
+  @Selector([StateLocation.location]) static isValid(
+    location: Position | null
+  ): boolean {
+    return location?.coords != null;
   }
-  @Selector() static permissionState(
+  @Selector([StateLocation]) static permissionState(
     state: StateLocationModel
   ): PermissionState {
     return state.permissionState;
   }
-  @Selector() static permissionDenied(state: StateLocationModel): boolean {
-    return StateLocation.permissionState(state) === 'denied';
+  @Selector([StateLocation.permissionState]) static permissionDenied(
+    permissionState: PermissionState
+  ): boolean {
+    return permissionState === 'denied';
   }
 
-  @Selector()
+  @Selector([StateLocation.isValid, StateLocation.location])
   static locationLike(
-    state: StateLocationModel
+    isValid: boolean,
+    location: Position | null
   ): LngLatLike | null | undefined {
-    return !StateLocation.isValid(state)
+    return !isValid
       ? null
-      : [
-          StateLocation.location(state)?.coords.longitude || 0,
-          StateLocation.location(state)?.coords.latitude || 0
-        ];
+      : [location?.coords.longitude || 0, location?.coords.latitude || 0];
   }
 
-  @Selector()
+  @Selector([StateLocation.isValid, StateLocation.location])
   static locationLiteral(
-    state: StateLocationModel
+    isValid: boolean,
+    location: Position | null
   ): MapboxGeocoder.LngLatLiteral | null {
-    return !StateLocation.isValid(state)
+    return !isValid
       ? null
       : {
-          longitude: StateLocation.location(state)?.coords.longitude || 0,
-          latitude: StateLocation.location(state)?.coords.latitude || 0
+          longitude: location?.coords.longitude || 0,
+          latitude: location?.coords.latitude || 0
         };
   }
 
-  ngxsOnInit(context: StateContext<StateLocationModel>) {
+  public ngxsOnInit(context: StateContext<StateLocationModel>): void {
     context.dispatch(new ActionLocationWatch());
   }
 

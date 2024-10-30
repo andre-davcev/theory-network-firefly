@@ -32,25 +32,31 @@ import { StateStorageOptions } from './storage.state.options';
 @State<StateStorageModel>(StateStorageOptions)
 @Injectable()
 export class StateStorage {
-  @Selector() static images(
+  @Selector([StateStorage]) static images(
     state: StateStorageModel
   ): Record<string, StorageImage> {
     return state.images;
   }
 
-  @Selector() static uploadProgress(state: StateStorageModel): number {
+  @Selector([StateStorage]) static uploadProgress(
+    state: StateStorageModel
+  ): number {
     return state.uploadProgress;
   }
-  @Selector() static uploadError(
+  @Selector([StateStorage]) static uploadError(
     state: StateStorageModel
   ): string | null | undefined {
     return state.uploadError;
   }
-  @Selector() static uploadErrored(state: StateStorageModel): boolean {
-    return state.uploadError != null;
+  @Selector([StateStorage.uploadError]) static uploadErrored(
+    uploadError: string | null | undefined
+  ): boolean {
+    return uploadError != null;
   }
-  @Selector() static uploadCompleted(state: StateStorageModel): boolean {
-    return StateStorage.uploadProgress(state) === 100;
+  @Selector([StateStorage.uploadProgress]) static uploadCompleted(
+    uploadProgress: number
+  ): boolean {
+    return uploadProgress === 100;
   }
 
   constructor(

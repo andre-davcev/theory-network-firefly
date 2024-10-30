@@ -23,11 +23,15 @@ export class StateSearch {
   public listsIndex: SearchIndex = this.searchClient.initIndex('lists');
   public eventsIndex: SearchIndex = this.searchClient.initIndex('events');
 
-  @Selector() static searchResults(state: StateSearchModel): Array<List> {
+  @Selector([StateSearch]) static searchResults(
+    state: StateSearchModel
+  ): Array<List> {
     return state.searchResults;
   }
-  @Selector() static searchResultsFound(state: StateSearchModel): boolean {
-    return state.searchResults.length > 0;
+  @Selector([StateSearch.searchResults]) static searchResultsFound(
+    searchResults: Array<List>
+  ): boolean {
+    return searchResults.length > 0;
   }
 
   @Action(ActionSearchReset)

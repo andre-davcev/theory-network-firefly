@@ -21,10 +21,10 @@ import { StateMobileOptions } from './mobile.state.options';
 @State<StateMobileModel>(StateMobileOptions)
 @Injectable()
 export class StateMobile {
-  @Selector() static menuOpen(state: StateMobileModel): boolean {
+  @Selector([StateMobile]) static menuOpen(state: StateMobileModel): boolean {
     return state.menuOpen;
   }
-  @Selector() static menuClosed(state: StateMobileModel): boolean {
+  @Selector([StateMobile]) static menuClosed(state: StateMobileModel): boolean {
     return !state.menuOpen;
   }
 
