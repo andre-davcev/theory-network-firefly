@@ -30,26 +30,34 @@ export class StateCityStream extends StateChild<
   StreamList,
   StateCityStreamModel
 > {
-  @Selector() static filter(state: StateCityStreamModel): ListsFilter {
+  @Selector([StateCityStream]) static filter(
+    state: StateCityStreamModel
+  ): ListsFilter {
     return state.filter;
   }
-  @Selector() static virtual(state: StateCityStreamModel): boolean {
-    return StateCityStream.filter(state).virtual;
+  @Selector([StateCityStream.filter]) static virtual(
+    filter: ListsFilter
+  ): boolean {
+    return filter.virtual;
   }
-  @Selector() static subscriptions(
-    state: StateCityStreamModel
+  @Selector([StateCityStream.filter]) static subscriptions(
+    filter: ListsFilter
   ): Record<string, SubscriptionPartial> {
-    return StateCityStream.filter(state).subscriptions;
+    return filter.subscriptions;
   }
-  @Selector() static subscriptionsNew(
+  @Selector([StateCityStream]) static subscriptionsNew(
     state: StateCityStreamModel
   ): Record<string, string> {
     return state.subscriptionsNew;
   }
-  @Selector() static subscriptionsSet(state: StateCityStreamModel): boolean {
+  @Selector([StateCityStream]) static subscriptionsSet(
+    state: StateCityStreamModel
+  ): boolean {
     return state.subscriptionsSet;
   }
-  @Selector() static cityStreamSet(state: StateCityStreamModel): boolean {
+  @Selector([StateCityStream]) static cityStreamSet(
+    state: StateCityStreamModel
+  ): boolean {
     return state.cityStreamSet;
   }
 
@@ -188,10 +196,10 @@ export class StateCityStream extends StateChild<
       StateCityStream.dataLookupState(state);
     const keys: Array<string> = StateCityStream.keysState(state);
     const subscriptions: Record<string, SubscriptionPartial> =
-      StateCityStream.subscriptions(state);
+      this.store.selectSnapshot(StateCityStream.subscriptions);
     const subscriptionsNew: Record<string, string> =
       StateCityStream.subscriptionsNew(state);
-    const virtual: boolean = StateCityStream.virtual(state);
+    const virtual: boolean = this.store.selectSnapshot(StateCityStream.virtual);
 
     return keys.filter(
       (id: string) =>

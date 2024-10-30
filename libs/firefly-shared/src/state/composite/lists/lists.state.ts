@@ -50,51 +50,50 @@ import { ListsFilter } from './lists.filter.model';
 @State<StateListsModel>(StateListsOptions)
 @Injectable()
 export class StateLists {
-  @Selector() static filter(state: StateListsModel): ListsFilter {
+  @Selector([StateLists]) static filter(state: StateListsModel): ListsFilter {
     return state.filter;
   }
-  @Selector() static virtual(state: StateListsModel): boolean {
-    return StateLists.filter(state).virtual;
+  @Selector([StateLists.filter]) static virtual(filter: ListsFilter): boolean {
+    return filter.virtual;
   }
-  @Selector() static subscriptions(
-    state: StateListsModel
+  @Selector([StateLists.filter]) static subscriptions(
+    filter: ListsFilter
   ): Record<string, SubscriptionPartial> {
-    return StateLists.filter(state).subscriptions;
+    return filter.subscriptions;
   }
 
-  @Selector() static tag(state: StateListsModel): Tag<TagList> | null {
+  @Selector([StateLists]) static tag(
+    state: StateListsModel
+  ): Tag<TagList> | null {
     return state.tag;
   }
 
-  @Selector([StateLists.filter]) static tagKey(
-    state: StateListsModel,
-    filter: ListsFilter
-  ): TagList {
+  @Selector([StateLists.filter]) static tagKey(filter: ListsFilter): TagList {
     return filter.tag;
   }
 
   @Selector([StateLists.tag]) static tagIndex(
-    state: StateListsModel,
     tag: Tag<TagList> | null
   ): number {
     return tag?.index || 0;
   }
 
   @Selector([
+    StateLists.filter,
     StateLists.tagKey,
     StateCityStream.data(),
     StateUserSubscriptions.data(),
     StateUserLists.data()
   ])
   public static data(
-    state: StateListsModel,
+    filter: ListsFilter,
     key: TagList,
     dataUnsubscribed: Array<StreamList>,
     dataSubscribed: Array<StreamList>,
     dataCreated: Array<StreamList>
   ): Array<StreamList> {
     const subscriptions: Record<string, SubscriptionPartial> =
-      StateLists.subscriptions(state);
+      StateLists.subscriptions(filter);
 
     const data: Array<StreamList> =
       key === TagListDefault.Popular
@@ -117,7 +116,6 @@ export class StateLists {
     StateUserLists.snapshotLookup()
   ])
   public static snapshotLookup(
-    state: StateListsModel,
     key: TagList,
     lookupUnsubscribed: Record<string, DocumentSnapshot<StreamList>>,
     lookupSubscribed: Record<string, DocumentSnapshot<StreamList>>,
@@ -137,7 +135,6 @@ export class StateLists {
     StateUserLists.dataLookup()
   ])
   public static dataLookup(
-    state: StateListsModel,
     key: TagList,
     lookupUnsubscribed: Record<string, StreamList>,
     lookupSubscribed: Record<string, StreamList>,
@@ -157,7 +154,6 @@ export class StateLists {
     StateUserLists.finishedPaging()
   ])
   public static pageFinished(
-    state: StateListsModel,
     key: TagList,
     finishedUnsubscribed: boolean,
     finishedSubscribed: boolean,
@@ -171,39 +167,46 @@ export class StateLists {
   }
 
   @Selector([
+    StateLists.filter,
     StateLists.tagKey,
     StateCityStream.data(),
     StateUserSubscriptions.data(),
     StateUserLists.data()
   ])
   public static found(
-    state: StateListsModel,
+    filter: ListsFilter,
     key: TagList,
     dataUnsubscribed: Array<StreamList>,
     dataSubscribed: Array<StreamList>,
     dataCreated: Array<StreamList>
   ): boolean {
     return (
-      StateLists.data(state, key, dataUnsubscribed, dataSubscribed, dataCreated)
-        .length > 0
+      StateLists.data(
+        filter,
+        key,
+        dataUnsubscribed,
+        dataSubscribed,
+        dataCreated
+      ).length > 0
     );
   }
 
   @Selector([
+    StateLists.filter,
     StateLists.tagKey,
     StateCityStream.data(),
     StateUserSubscriptions.data(),
     StateUserLists.data()
   ])
   public static empty(
-    state: StateListsModel,
+    filter: ListsFilter,
     key: TagList,
     dataUnsubscribed: Array<StreamList>,
     dataSubscribed: Array<StreamList>,
     dataCreated: Array<StreamList>
   ): boolean {
     return !StateLists.found(
-      state,
+      filter,
       key,
       dataUnsubscribed,
       dataSubscribed,
@@ -212,19 +215,23 @@ export class StateLists {
   }
 
   @Selector([StateUser.isPublisher])
-  public static add(state: StateListsModel, isPublisher: boolean): boolean {
+  public static add(isPublisher: boolean): boolean {
     return isPublisher;
   }
 
-  @Selector([StateLists.tagKey, StateLocation.permissionDenied])
+  @Selector([
+    StateLists.filter,
+    StateLists.tagKey,
+    StateLocation.permissionDenied
+  ])
   static emptyMessage(
-    state: StateListsModel,
+    filter: ListsFilter,
     key: TagList,
     permissionDenied: boolean
   ): string {
     return permissionDenied
       ? 'page.stream.empty.locationDenied'
-      : StateLists.virtual(state)
+      : StateLists.virtual(filter)
       ? 'page.stream.empty.virtual'
       : key === TagListDefault.Popular
       ? 'page.stream.empty.unsubscribed'
@@ -336,11 +343,11 @@ export class StateLists {
 
   @Action(ActionListsSubscriptionToggle)
   subscriptionToggle(
-    { dispatch, getState }: StateContext<StateListsModel>,
+    { dispatch }: StateContext<StateListsModel>,
     { id, permanent }: ActionListsSubscriptionToggle
   ) {
-    const subscription: SubscriptionPartial = StateLists.subscriptions(
-      getState()
+    const subscription: SubscriptionPartial = this.store.selectSnapshot(
+      StateLists.subscriptions
     )[id];
 
     return !permanent
@@ -352,13 +359,11 @@ export class StateLists {
 
   @Action(ActionListsSubscriptionAdd)
   subscriptionAdd(
-    { dispatch, getState }: StateContext<StateListsModel>,
+    { dispatch }: StateContext<StateListsModel>,
     { id }: ActionListsSubscriptionAdd
   ) {
-    const state: StateListsModel = getState();
-
     const subscriptions: Record<string, SubscriptionPartial> =
-      StateLists.subscriptions(state);
+      this.store.selectSnapshot(StateLists.subscriptions);
 
     const data: StreamList = this.store.selectSnapshot(StateLists.dataLookup)[
       id
@@ -383,13 +388,11 @@ export class StateLists {
 
   @Action(ActionListsSubscriptionRemove)
   subscriptionRemove(
-    { dispatch, getState }: StateContext<StateListsModel>,
+    { dispatch }: StateContext<StateListsModel>,
     { id }: ActionListsSubscriptionRemove
   ) {
-    const state: StateListsModel = getState();
-
     const subscriptions: Record<string, SubscriptionPartial> =
-      StateLists.subscriptions(state);
+      this.store.selectSnapshot(StateLists.subscriptions);
     delete subscriptions[id];
 
     const data: StreamList = this.store.selectSnapshot(StateLists.dataLookup)[
@@ -415,13 +418,11 @@ export class StateLists {
 
   @Action(ActionListsSubscriptionOnOff)
   subscriptionOnOff(
-    { dispatch, getState }: StateContext<StateListsModel>,
+    { dispatch }: StateContext<StateListsModel>,
     { id, on }: ActionListsSubscriptionOnOff
   ) {
-    const state: StateListsModel = getState();
-
     const subscriptions: Record<string, SubscriptionPartial> =
-      StateLists.subscriptions(state);
+      this.store.selectSnapshot(StateLists.subscriptions);
 
     subscriptions[id].on = on;
 

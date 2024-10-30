@@ -28,20 +28,23 @@ import { StateCityOptions } from './city.state.options';
 @State<StateCityModel>(StateCityOptions)
 @Injectable()
 export class StateCity {
-  @Selector() static city(state: StateCityModel): CityInfo | null {
+  @Selector([StateCity]) static city(state: StateCityModel): CityInfo | null {
     return state.city;
   }
-  @Selector() static cityId(state: StateCityModel): string | null {
-    const city: CityInfo | null = StateCity.city(state);
+  @Selector([StateCity.city]) static cityId(
+    city: CityInfo | null
+  ): string | null {
     return city == null ? null : city.id;
   }
-  @Selector() static found(state: StateCityModel): boolean {
-    return StateCity.city(state) != null;
+  @Selector([StateCity.city]) static found(city: CityInfo | null): boolean {
+    return city != null;
   }
-  @Selector() static isNew(state: StateCityModel): boolean {
+  @Selector([StateCity]) static isNew(state: StateCityModel): boolean {
     return state.isNew;
   }
-  @Selector() static geopoint(state: StateCityModel): GeoPoint | null {
+  @Selector([StateCity]) static geopoint(
+    state: StateCityModel
+  ): GeoPoint | null {
     return state.geopoint;
   }
 

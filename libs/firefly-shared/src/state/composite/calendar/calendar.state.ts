@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Action, Selector, State, StateContext } from '@ngxs/store';
+import { Action, Selector, State, StateContext, Store } from '@ngxs/store';
 import { from } from 'rxjs';
 import { switchMap, tap } from 'rxjs/operators';
 
@@ -32,31 +32,40 @@ import { StateCalendarOptions } from './calendar.state.options';
 @State<StateCalendarModel>(StateCalendarOptions)
 @Injectable()
 export class StateCalendar {
-  @Selector() static filter(state: StateCalendarModel): CalendarFilter {
+  @Selector([StateCalendar]) static filter(
+    state: StateCalendarModel
+  ): CalendarFilter {
     return state.filter;
   }
-  @Selector() static type(state: StateCalendarModel): EventType {
-    return StateCalendar.filter(state).type;
+  @Selector([StateCalendar.filter]) static type(
+    filter: CalendarFilter
+  ): EventType {
+    return filter.type;
   }
-  @Selector() static virtual(state: StateCalendarModel): boolean {
-    return StateCalendar.filter(state).virtual;
+  @Selector([StateCalendar.filter]) static virtual(
+    filter: CalendarFilter
+  ): boolean {
+    return filter.virtual;
   }
 
-  @Selector([StateUserAlerts.data(), StateUserEvents.data()])
+  @Selector([
+    StateCalendar.filter,
+    StateUserAlerts.data(),
+    StateUserEvents.data()
+  ])
   public static data(
-    state: StateCalendarModel,
+    filter: CalendarFilter,
     alerts: Array<Alert>,
     events: Array<Event>
   ): Array<DateEvents> {
     const list: Array<Event> =
-      StateCalendar.type(state) === EventType.Upcoming ? alerts : events;
+      StateCalendar.type(filter) === EventType.Upcoming ? alerts : events;
 
     return ServiceEvents.eventsList(list);
   }
 
   @Selector([StateUserEvents.data(), StateList.events, StateList.eventsPending])
   public static eventsAvailable(
-    state: StateCalendarModel,
     events: Array<Event>,
     listEvents: Array<Event>,
     listEventsPending: Array<Event>
@@ -72,56 +81,48 @@ export class StateCalendar {
     return ServiceEvents.eventsList(events);
   }
 
-  @Selector([StateUserAlerts.data(), StateUserEvents.data()])
+  @Selector([
+    StateCalendar.filter,
+    StateUserAlerts.data(),
+    StateUserEvents.data()
+  ])
   public static exists(
-    state: StateCalendarModel,
+    filter: CalendarFilter,
     alerts: Array<Alert>,
     events: Array<Event>
   ): boolean {
-    return StateCalendar.data(state, alerts, events).length > 0;
+    return StateCalendar.data(filter, alerts, events).length > 0;
   }
 
   @Selector([StateUserEvents.data(), StateList.events, StateList.eventsPending])
   public static existsAvailable(
-    state: StateCalendarModel,
     events: Array<Event>,
     listEvents: Array<Event>,
     listEventsPending: Array<Event>
   ): boolean {
     return (
-      StateCalendar.eventsAvailable(
-        state,
-        events,
-        listEvents,
-        listEventsPending
-      ).length > 0
+      StateCalendar.eventsAvailable(events, listEvents, listEventsPending)
+        .length > 0
     );
   }
 
   @Selector([StateUser.isPublisher])
-  public static canAdd(
-    state: StateCalendarModel,
-    isPublisher: boolean
-  ): boolean {
+  public static canAdd(isPublisher: boolean): boolean {
     return isPublisher;
   }
 
   @Selector([StateCalendar.exists, StateUser.isUser])
-  public static showEmpty(
-    state: StateCalendarModel,
-    exists: boolean,
-    isUser: boolean
-  ): boolean {
+  public static showEmpty(exists: boolean, isUser: boolean): boolean {
     return !isUser || !exists;
   }
 
-  @Selector([StateUser.isUser])
-  static emptyMessage(state: StateCalendarModel, isUser: boolean): string {
-    const type: EventType = StateCalendar.type(state);
+  @Selector([StateCalendar.filter, StateUser.isUser])
+  static emptyMessage(filter: CalendarFilter, isUser: boolean): string {
+    const type: EventType = StateCalendar.type(filter);
 
     return !isUser
       ? 'page.events.empty.not-user'
-      : StateCalendar.virtual(state)
+      : StateCalendar.virtual(filter)
       ? 'page.events.empty.virtual'
       : type === EventType.New
       ? 'page.events.empty.new'
@@ -136,7 +137,6 @@ export class StateCalendar {
     StateUserEvents.finishedPaging()
   ])
   public static pagingFinished(
-    state: StateCalendarModel,
     eventType: EventType,
     finishedPagingAlerts: boolean,
     finishedPagingEvents: boolean
@@ -145,6 +145,8 @@ export class StateCalendar {
       ? finishedPagingEvents
       : finishedPagingAlerts;
   }
+
+  constructor(private store: Store) {}
 
   @Action(ActionCalendarSetType)
   setType(
@@ -188,10 +190,10 @@ export class StateCalendar {
 
   @Action(ActionCalendarPage)
   page(
-    { dispatch, getState }: StateContext<StateCalendarModel>,
+    { dispatch }: StateContext<StateCalendarModel>,
     { infiniteScroll }: ActionCalendarPage
   ) {
-    const type: EventType = StateCalendar.type(getState());
+    const type: EventType = this.store.selectSnapshot(StateCalendar.type);
 
     return dispatch(
       type === EventType.Upcoming

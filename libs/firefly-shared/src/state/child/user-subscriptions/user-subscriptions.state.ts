@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Action, Selector, State, StateContext } from '@ngxs/store';
+import { Action, Selector, State, StateContext, Store } from '@ngxs/store';
 import { switchMap } from 'rxjs/operators';
 
 import {
@@ -37,19 +37,27 @@ export class StateUserSubscriptions extends StateChild<
   Subscription,
   StateUserSubscriptionsModel
 > {
-  @Selector() static filter(state: StateUserSubscriptionsModel): ListsFilter {
+  @Selector([StateUserSubscriptions]) static filter(
+    state: StateUserSubscriptionsModel
+  ): ListsFilter {
     return state.filter;
   }
-  @Selector() static virtual(state: StateUserSubscriptionsModel): boolean {
-    return StateUserSubscriptions.filter(state).virtual;
+  @Selector([StateUserSubscriptions.filter]) static virtual(
+    filter: ListsFilter
+  ): boolean {
+    return filter.virtual;
   }
-  @Selector() static subscriptions(
-    state: StateUserSubscriptionsModel
+  @Selector([StateUserSubscriptions.filter]) static subscriptions(
+    filter: ListsFilter
   ): Record<string, SubscriptionPartial> {
-    return StateUserSubscriptions.filter(state).subscriptions;
+    return filter.subscriptions;
   }
 
-  constructor(service: ServiceSubscriptions, storage: ServiceStorage) {
+  constructor(
+    service: ServiceSubscriptions,
+    storage: ServiceStorage,
+    private store: Store
+  ) {
     super(
       StateUserSubscriptionsOptions.defaults as StateUserSubscriptionsModel,
       {
@@ -161,8 +169,10 @@ export class StateUserSubscriptions extends StateChild<
       StateUserSubscriptions.dataLookupState(state);
     const keys: Array<string> = StateUserSubscriptions.keysState(state);
     const subscriptions: Record<string, SubscriptionPartial> =
-      StateUserSubscriptions.subscriptions(state);
-    const virtual: boolean = StateUserSubscriptions.virtual(state);
+      this.store.selectSnapshot(StateUserSubscriptions.subscriptions);
+    const virtual: boolean = this.store.selectSnapshot(
+      StateUserSubscriptions.virtual
+    );
 
     return keys.filter(
       (id: string) =>

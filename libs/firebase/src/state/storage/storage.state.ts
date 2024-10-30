@@ -1,4 +1,4 @@
-import { Action, Selector, State, StateContext } from '@ngxs/store';
+import { Action, Selector, State, StateContext, Store } from '@ngxs/store';
 
 import { Injectable } from '@angular/core';
 import {
@@ -60,6 +60,7 @@ export class StateStorage {
   }
 
   constructor(
+    private store: Store,
     private service: ServiceStorage,
     private storage: AngularFireStorage
   ) {}
@@ -169,7 +170,7 @@ export class StateStorage {
       tap((uploadProgress: number | undefined) =>
         patchState({ uploadProgress })
       ),
-      filter(() => StateStorage.uploadCompleted(getState())),
+      filter(() => this.store.selectSnapshot(StateStorage.uploadCompleted)),
       switchMap(() => task.snapshotChanges()),
       last(),
       switchMap(() => ref.getDownloadURL()),

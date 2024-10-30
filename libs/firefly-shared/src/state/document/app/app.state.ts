@@ -29,26 +29,27 @@ import { DEFAULT_ROUTER_STATE, StateAppOptions } from './app.state.options';
 @State<StateAppModel>(StateAppOptions)
 @Injectable()
 export class StateApp implements NgxsOnInit {
-  @Selector() static loading(state: StateAppModel): boolean {
+  @Selector([StateApp]) static loading(state: StateAppModel): boolean {
     return state.loading;
   }
-  @Selector() static isLoading(state: StateAppModel): boolean {
+  @Selector([StateApp]) static isLoading(state: StateAppModel): boolean {
     return state.loadingElement != null;
   }
-  @Selector() static loadingElement(state: StateAppModel): any {
+  @Selector([StateApp]) static loadingElement(state: StateAppModel): any {
     return state.loadingElement;
   }
 
-  @Selector() static routerState(state: StateAppModel): RouterStateParams {
+  @Selector([StateApp]) static routerState(
+    state: StateAppModel
+  ): RouterStateParams {
     return state.routerState;
   }
 
-  @Selector() static homePath(state: StateAppModel): Array<string> {
+  @Selector([StateApp]) static homePath(state: StateAppModel): Array<string> {
     return state.tabPath;
   }
 
   @Selector([StateApp.routerState]) static tab(
-    state: StateAppModel,
     routerState: RouterStateParams
   ): PageTab {
     const url: string = routerState.url;
@@ -117,9 +118,7 @@ export class StateApp implements NgxsOnInit {
   loadingHide({ patchState, getState }: StateContext<StateAppModel>) {
     patchState({ loading: false });
     return of(StateApp.loadingElement(getState())).pipe(
-      tap((loading: HTMLIonLoadingElement) =>
-        patchState({ loadingElement: null })
-      ),
+      tap(() => patchState({ loadingElement: null })),
       filter((loading: HTMLIonLoadingElement) => loading != null),
       tap((loading: HTMLIonLoadingElement) => loading.dismiss())
     );

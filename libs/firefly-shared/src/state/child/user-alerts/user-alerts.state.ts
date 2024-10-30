@@ -48,14 +48,20 @@ import { StateUserAlertsOptions } from './user-alerts.state.options';
 @State<StateUserAlertsModel>(StateUserAlertsOptions)
 @Injectable()
 export class StateUserAlerts extends StateChild<Alert, StateUserAlertsModel> {
-  @Selector() static filter(state: StateUserAlertsModel): CalendarFilter {
+  @Selector([StateUserAlerts]) static filter(
+    state: StateUserAlertsModel
+  ): CalendarFilter {
     return state.filter;
   }
-  @Selector() static type(state: StateUserAlertsModel): EventType {
-    return StateUserAlerts.filter(state).type;
+  @Selector([StateUserAlerts.filter]) static type(
+    filter: CalendarFilter
+  ): EventType {
+    return filter.type;
   }
-  @Selector() static virtual(state: StateUserAlertsModel): boolean {
-    return StateUserAlerts.filter(state).virtual;
+  @Selector([StateUserAlerts.filter]) static virtual(
+    filter: CalendarFilter
+  ): boolean {
+    return filter.virtual;
   }
 
   constructor(
@@ -352,7 +358,7 @@ export class StateUserAlerts extends StateChild<Alert, StateUserAlertsModel> {
     const lookup: Record<string, Alert> =
       StateUserAlerts.dataLookupState(state);
     const keys: Array<string> = StateUserAlerts.keysState(state);
-    const virtual: boolean = StateUserAlerts.virtual(state);
+    const virtual: boolean = this.store.selectSnapshot(StateUserAlerts.virtual);
 
     return keys.filter((id: string) => !virtual || lookup[id]?.virtual);
   }
