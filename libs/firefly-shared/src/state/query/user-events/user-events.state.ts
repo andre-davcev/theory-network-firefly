@@ -33,14 +33,22 @@ import { StateUserEventsOptions } from './user-events.state.options';
 @State<StateUserEventsModel>(StateUserEventsOptions)
 @Injectable()
 export class StateUserEvents extends StateQuery<Event, StateUserEventsModel> {
-  @Selector() static filter(state: StateUserEventsModel): CalendarFilter {
+  @Selector([StateUserEvents]) static filter(
+    state: StateUserEventsModel
+  ): CalendarFilter {
     return state.filter;
   }
-  @Selector() static type(state: StateUserEventsModel): EventType {
-    return StateUserEvents.filter(state).type;
+
+  @Selector([StateUserEvents.filter]) static type(
+    filter: CalendarFilter
+  ): EventType {
+    return filter.type;
   }
-  @Selector() static virtual(state: StateUserEventsModel): boolean {
-    return StateUserEvents.filter(state).virtual;
+
+  @Selector([StateUserEvents.filter]) static virtual(
+    filter: CalendarFilter
+  ): boolean {
+    return filter.virtual;
   }
 
   constructor(
@@ -165,7 +173,7 @@ export class StateUserEvents extends StateQuery<Event, StateUserEventsModel> {
     const lookup: Record<string, Event> =
       StateUserEvents.dataLookupState(state);
     const keys: Array<string> = StateUserEvents.keysState(state);
-    const virtual: boolean = StateUserEvents.virtual(state);
+    const virtual: boolean = this.store.selectSnapshot(StateUserEvents.virtual);
 
     return keys.filter((id: string) => !virtual || lookup[id]?.virtual);
   }

@@ -310,7 +310,7 @@ export class StateUser
     context: StateContext<StateUserModel>,
     action: ActionUserSet
   ) {
-    const { dispatch, getState } = context;
+    const { dispatch } = context;
 
     return super.set(context, action).pipe(
       tap(() =>
@@ -322,9 +322,11 @@ export class StateUser
       switchMap(() =>
         dispatch([
           new ActionUserNotificationsSet(),
-          new ActionLanguageSet(StateUser.language(getState()) || 'en-us'),
+          new ActionLanguageSet(
+            this.store.selectSnapshot(StateUser.language) || 'en-us'
+          ),
           new ActionListsSetSubscriptions(
-            StateUser.subscriptionsStatus(getState())
+            this.store.selectSnapshot(StateUser.subscriptionsStatus)
           )
         ])
       ),
@@ -433,7 +435,7 @@ export class StateUser
         dispatch([
           new ActionUserSetErrorAuth(),
           new ActionListsSetSubscriptions(
-            StateUser.subscriptionsStatus(getState())
+            this.store.selectSnapshot(StateUser.subscriptionsStatus)
           )
         ])
       ),
@@ -525,13 +527,13 @@ export class StateUser
   }
 
   @Action(ActionUserWatchLanguage, { cancelUncompleted: true })
-  watchLanguage({ dispatch, getState }: StateContext<StateUserModel>) {
+  watchLanguage({ dispatch }: StateContext<StateUserModel>) {
     return this.store.select(StateLanguage.language).pipe(
       tap(() => dispatch(new ActionTagsGet())),
       filter(
         (language: string) =>
           language != null &&
-          StateUser.language(getState()) !== language &&
+          this.store.selectSnapshot(StateUser.language) !== language &&
           this.store.selectSnapshot(StateUser.isUser)
       ),
       switchMap((language: string) =>
@@ -547,7 +549,7 @@ export class StateUser
 
   @Action(ActionUserAddTokenAfterLogin)
   addTokenAfterLogin(
-    { getState, dispatch }: StateContext<StateUserModel>,
+    { dispatch }: StateContext<StateUserModel>,
     { token }: ActionUserAddTokenAfterLogin
   ) {
     return this.store.select(StateUser.authenticated).pipe(
@@ -559,10 +561,12 @@ export class StateUser
 
   @Action(ActionUserAddToken)
   addToken(
-    { getState, dispatch }: StateContext<StateUserModel>,
+    { dispatch }: StateContext<StateUserModel>,
     { payload }: ActionUserAddToken
   ) {
-    const tokens: Record<string, Token> = StateUser.tokens(getState());
+    const tokens: Record<string, Token> = this.store.selectSnapshot(
+      StateUser.tokens
+    );
     const token: string = payload;
     const existing: Token = tokens[token];
     const now: FieldValue = serverTimestamp();

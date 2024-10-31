@@ -47,21 +47,6 @@ export class StateChild<
   protected static sortFieldsState(state: any): Record<string, SortField> {
     return state.sortFields;
   }
-
-  public static id() {
-    return createSelector([this], (state: any) => StateChild.idState(state));
-  }
-  public static childLookup() {
-    return createSelector([this], (state: any) =>
-      StateChild.childLookupState(state)
-    );
-  }
-  public static sortFields() {
-    return createSelector([this], (state: any) =>
-      StateChild.sortFieldsState(state)
-    );
-  }
-
   protected static offsetState(state: any): number {
     const dataLookup: Record<string, any> =
       StateCollection.dataLookupState(state);
@@ -76,6 +61,20 @@ export class StateChild<
       StateChild.initializedState(state) &&
       StateChild.dataState(state).length ===
         StateChild.keysFilteredState(state).length
+    );
+  }
+
+  public static id() {
+    return createSelector([this], (state: any) => StateChild.idState(state));
+  }
+  public static childLookup() {
+    return createSelector([this], (state: any) =>
+      StateChild.childLookupState(state)
+    );
+  }
+  public static sortFields() {
+    return createSelector([this], (state: any) =>
+      StateChild.sortFieldsState(state)
     );
   }
 
