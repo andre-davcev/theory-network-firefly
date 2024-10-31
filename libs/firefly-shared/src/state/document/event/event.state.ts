@@ -26,6 +26,7 @@ import {
 import { MapboxPlaceType } from '@theory/mapbox';
 import { StateDocument } from '@theory/ngxs';
 
+import { UntypedFormGroup } from '@angular/forms';
 import { ServiceEvents, ServiceLocation } from '../../../services';
 import { StateUserAlerts } from '../../child';
 import {
@@ -127,128 +128,166 @@ export class StateEvent extends StateDocument<Event, StateEventModel> {
     );
   }
 
-  @Selector() static locationTypes(
-    state: StateEventModel
+  @Selector([StateEvent.data()]) static userId(form: Event): string {
+    return form.userId;
+  }
+
+  @Selector([StateEvent.data()]) static locationTypes(
+    form: any
   ): Array<MapboxPlaceType> {
-    return StateEvent.dataState(state).locationTypes;
-  }
-  @Selector() static locationDefined(state: StateEventModel): boolean {
-    return StateEvent.locationTypes(state) != null;
-  }
-  @Selector() static timeStart(state: StateEventModel): Timestamp {
-    return StateEvent.dataState(state).timeStart;
-  }
-  @Selector() static timeEnd(state: StateEventModel): Timestamp {
-    return StateEvent.dataState(state).timeEnd;
-  }
-  @Selector() static timeEndValid(state: StateEventModel): boolean {
-    return StateEvent.formGroupState(state)?.get('timeEnd')?.errors == null;
-  }
-  @Selector() static timeStartValid(state: StateEventModel): boolean {
-    return StateEvent.formGroupState(state)?.get('timeStart')?.errors == null;
-  }
-  @Selector() static private(state: StateEventModel): boolean {
-    return StateEvent.dataState(state).private;
-  }
-  @Selector() static notifyComplete(state: StateEventModel): boolean {
-    return StateEvent.dataState(state).notifyComplete;
-  }
-  @Selector() static timeNotify(state: StateEventModel): Timestamp {
-    return StateEvent.dataState(state).timeNotify;
-  }
-  @Selector() static timeNotifyValid(state: StateEventModel): boolean {
-    return StateEvent.formGroupState(state)?.get('timeNotify')?.errors == null;
-  }
-  @Selector() static lists(state: StateEventModel): Array<string> {
-    return StateEvent.dataState(state).lists;
-  }
-  @Selector() static timeIsLocked(state: StateEventModel): boolean {
-    return StateEvent.notifyComplete(state);
-  }
-  @Selector() static icon(state: StateEventModel): string {
-    return StateEvent.metadataState(state).icon;
-  }
-  @Selector() static image(state: StateEventModel): string {
-    return StateEvent.metadataState(state).image;
-  }
-  @Selector() static place(state: StateEventModel): Place {
-    return StateEvent.metadataState(state).place;
-  }
-  @Selector() static virtual(state: StateEventModel): boolean {
-    return StateEvent.dataState(state).virtual;
-  }
-  @Selector() static website(state: StateEventModel): string {
-    return StateEvent.dataState(state).website;
-  }
-  @Selector() static websiteIsSet(state: StateEventModel): boolean {
-    return (StateEvent.website(state) || '').trim().length > 0;
-  }
-  @Selector() static phone(state: StateEventModel): string {
-    return StateEvent.dataState(state).phone;
-  }
-  @Selector() static phoneIsSet(state: StateEventModel): boolean {
-    return (StateEvent.phone(state) || '').trim().length > 0;
-  }
-  @Selector() static draft(state: StateEventModel): boolean {
-    return StateEvent.dataState(state).draft;
+    return form.locationTypes;
   }
 
-  @Selector() static placeCenter(state: StateEventModel): LngLatLike | null {
-    const place: Place = StateEvent.place(state);
+  @Selector([StateEvent.locationTypes]) static locationDefined(
+    locationTypes: Array<MapboxPlaceType>
+  ): boolean {
+    return locationTypes != null;
+  }
 
+  @Selector([StateEvent.data()]) static timeStart(form: any): Timestamp {
+    return form.timeStart;
+  }
+
+  @Selector([StateEvent.data()]) static timeEnd(form: any): Timestamp {
+    return form.timeEnd;
+  }
+
+  @Selector([StateEvent.formGroup()]) static timeEndValid(
+    formGroup: UntypedFormGroup
+  ): boolean {
+    return formGroup?.get('timeEnd')?.errors == null;
+  }
+
+  @Selector([StateEvent.formGroup()]) static timeStartValid(
+    formGroup: UntypedFormGroup
+  ): boolean {
+    return formGroup?.get('timeStart')?.errors == null;
+  }
+
+  @Selector([StateEvent.data()]) static private(form: Event): boolean {
+    return form.private;
+  }
+
+  @Selector([StateEvent.data()]) static notifyComplete(form: Event): boolean {
+    return form.notifyComplete;
+  }
+
+  @Selector([StateEvent.data()]) static timeNotify(form: any): Timestamp {
+    return form.timeNotify;
+  }
+
+  @Selector([StateEvent.formGroup()]) static timeNotifyValid(
+    formGroup: UntypedFormGroup
+  ): boolean {
+    return formGroup?.get('timeNotify')?.errors == null;
+  }
+
+  @Selector([StateEvent.data()]) static lists(form: Event): Array<string> {
+    return form.lists;
+  }
+
+  @Selector([StateEvent.notifyComplete]) static timeIsLocked(
+    notifyComplete: boolean
+  ): boolean {
+    return notifyComplete;
+  }
+
+  @Selector([StateEvent.metadata()]) static icon(
+    metadata: MetadataEvent
+  ): string | undefined {
+    return metadata.icon;
+  }
+
+  @Selector([StateEvent.metadata()]) static image(
+    metadata: MetadataEvent
+  ): string | undefined {
+    return metadata.image;
+  }
+
+  @Selector([StateEvent.metadata()]) static place(
+    metadata: MetadataEvent
+  ): Place | undefined {
+    return metadata.place;
+  }
+
+  @Selector([StateEvent.data()]) static virtual(form: Event): boolean {
+    return form.virtual;
+  }
+
+  @Selector([StateEvent.data()]) static website(
+    form: Event
+  ): string | undefined {
+    return form.website;
+  }
+
+  @Selector([StateEvent.website]) static websiteIsSet(
+    website: string
+  ): boolean {
+    return (website || '').trim().length > 0;
+  }
+
+  @Selector([StateEvent.data()]) static phone(form: Event): string | undefined {
+    return form.phone;
+  }
+
+  @Selector([StateEvent.phone]) static phoneIsSet(phone: string): boolean {
+    return (phone || '').trim().length > 0;
+  }
+
+  @Selector([StateEvent.data()]) static draft(form: Event): boolean {
+    return form.draft;
+  }
+
+  @Selector([StateEvent.place]) static placeCenter(
+    place: Place
+  ): LngLatLike | null {
     return place == null ? null : place.centerLike;
   }
 
-  @Selector() static placeDefined(state: StateEventModel): boolean {
-    return StateEvent.place(state) != null;
+  @Selector([StateEvent.place]) static placeDefined(place: Place): boolean {
+    return place != null;
   }
 
-  @Selector([StateUser.userId])
-  static isOwner(state: StateEventModel, userId: string): boolean {
-    return StateEvent.dataState(state).userId === userId;
+  @Selector([StateEvent.userId, StateUser.userId])
+  static isOwner(userIdEvent: string, userId: string): boolean {
+    return userIdEvent === userId;
   }
 
-  @Selector([StateList.canEdit])
-  static canAccept(state: StateEventModel, canEditList: boolean): boolean {
-    return StateEvent.draft(state) && canEditList;
+  @Selector([StateEvent.draft, StateList.canEdit])
+  static canAccept(draft: boolean, canEditList: boolean): boolean {
+    return draft && canEditList;
   }
 
-  @Selector([StateUser.userId, StateList.canEdit])
+  @Selector([StateEvent.isNew(), StateEvent.isOwner, StateEvent.canAccept])
   static canEditShow(
-    state: StateEventModel,
-    userId: string,
-    canEditList: boolean
+    isNew: boolean,
+    isOwner: boolean,
+    canAccept: boolean
   ): boolean {
-    return (
-      (StateEvent.isOwner(state, userId) || StateEvent.isNewState(state)) &&
-      !StateEvent.canAccept(state, canEditList)
-    );
+    return (isOwner || isNew) && !canAccept;
   }
 
-  @Selector([StateUser.userId, StateList.canEdit])
+  @Selector([
+    StateEvent.canEditShow,
+    StateEvent.canUpdate(),
+    StateEvent.notifyComplete
+  ])
   static canEdit(
-    state: StateEventModel,
-    userId: string,
-    canEditList: boolean
+    canEditShow: boolean,
+    canUpdate: boolean,
+    notifyComplete: boolean
   ): boolean {
-    return (
-      StateEvent.canEditShow(state, userId, canEditList) &&
-      StateEvent.canUpdateState(state) &&
-      !StateEvent.notifyComplete(state)
-    );
+    return canEditShow && canUpdate && !notifyComplete;
   }
 
-  @Selector([StateUser.userId])
-  static canDeleteShow(state: StateEventModel, userId: string): boolean {
-    return StateEvent.isOwner(state, userId) && !StateEvent.isNewState(state);
+  @Selector([StateEvent.isOwner, StateEvent.isNew()])
+  static canDeleteShow(isOwner: boolean, isNew: boolean): boolean {
+    return isOwner && !isNew;
   }
 
-  @Selector([StateUser.userId])
-  static canDelete(state: StateEventModel, userId: string): boolean {
-    return (
-      StateEvent.canDeleteShow(state, userId) &&
-      !StateEvent.notifyComplete(state)
-    );
+  @Selector([StateEvent.canDeleteShow, StateEvent.notifyComplete])
+  static canDelete(canDeleteShow: boolean, notifyComplete: boolean): boolean {
+    return canDeleteShow && !notifyComplete;
   }
 
   @Action(ActionEventReset)
@@ -287,7 +326,7 @@ export class StateEvent extends StateDocument<Event, StateEventModel> {
             )
       ),
       switchMap(() =>
-        StateEvent.image(getState()) == null
+        this.store.selectSnapshot(StateEvent.image) == null
           ? of(null)
           : this.store.dispatch(new ActionEventImageSet())
       ),
