@@ -4,7 +4,7 @@ import { Action, Selector, State, StateContext, Store } from '@ngxs/store';
 import { forkJoin, from, of } from 'rxjs';
 import { map, switchMap, tap } from 'rxjs/operators';
 
-import { Collection, Event, List } from '@firefly/cloud';
+import { Collection, Event, List, MetadataList } from '@firefly/cloud';
 import { CoreEnum, ImageType } from '@theory/core';
 import {
   DocumentSnapshot,
@@ -56,22 +56,49 @@ import { StateListOptions } from './list.state.options';
 @State<StateListModel>(StateListOptions)
 @Injectable()
 export class StateList extends StateDocument<List, StateListModel> {
-  @Selector() static private(state: StateListModel): boolean {
-    return StateList.dataState(state).private;
-  }
-  @Selector() static image(state: StateListModel): string {
-    return StateList.metadataState(state).image;
-  }
-  @Selector() static events(state: StateListModel): Array<Event> {
-    return state.events[StateList.idState(state)] || [];
-  }
-  @Selector() static eventsPending(state: StateListModel): Array<Event> {
-    return state.eventsPending[StateList.idState(state)] || [];
+  @Selector([StateList.data()]) static userId(form: List): string {
+    return form.userId;
   }
 
-  @Selector([StateUser.userId])
-  static canEdit(state: StateListModel, userId: string): boolean {
-    return StateList.dataState(state).userId === userId;
+  @Selector([StateList.data()]) static private(form: List): boolean {
+    return form.private;
+  }
+
+  @Selector([StateList.metadata()]) static image(
+    metadata: MetadataList
+  ): string | undefined {
+    return metadata.image;
+  }
+
+  @Selector([StateList]) static eventsRaw(
+    state: StateListModel
+  ): Record<string, Array<Event>> {
+    return state.events;
+  }
+
+  @Selector([StateList.eventsRaw, StateList.id()]) static events(
+    events: Record<string, Array<Event>>,
+    id: string
+  ): Array<Event> {
+    return events[id] || [];
+  }
+
+  @Selector([StateList]) static eventsPendingRaw(
+    state: StateListModel
+  ): Record<string, Array<Event>> {
+    return state.eventsPending;
+  }
+
+  @Selector([StateList.eventsPendingRaw, StateList.id()]) static eventsPending(
+    eventsPending: Record<string, Array<Event>>,
+    id: string
+  ): Array<Event> {
+    return eventsPending[id] || [];
+  }
+
+  @Selector([StateList.userId, StateUser.userId])
+  static canEdit(userIdList: string, userId: string): boolean {
+    return userIdList === userId;
   }
 
   constructor(

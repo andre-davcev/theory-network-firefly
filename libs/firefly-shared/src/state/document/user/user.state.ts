@@ -150,87 +150,121 @@ export class StateUser
     );
   }
 
-  @Selector() static authData(state: StateUserModel): FirebaseUser | null {
+  @Selector([StateUser]) static authData(
+    state: StateUserModel
+  ): FirebaseUser | null {
     return state.authData;
   }
-  @Selector() static authenticated(state: StateUserModel): boolean {
-    return state.authData != null;
+
+  @Selector([StateUser.authData]) static authenticated(
+    authData: FirebaseUser | null
+  ): boolean {
+    return authData != null;
   }
-  @Selector() static isAnonymous(state: StateUserModel): boolean {
-    return (
-      (StateUser.authenticated(state) &&
-        StateUser.authData(state)?.isAnonymous) ||
-      false
-    );
+
+  @Selector([StateUser.authenticated, StateUser.authData]) static isAnonymous(
+    authenticated: boolean,
+    authData: FirebaseUser | null
+  ): boolean {
+    return (authenticated && authData?.isAnonymous) || false;
   }
-  @Selector([StateLocation.permissionDenied]) static isUser(
-    state: StateUserModel,
+  @Selector([
+    StateUser.authenticated,
+    StateUser.isAnonymous,
+    StateLocation.permissionDenied
+  ])
+  static isUser(
+    authenticated: boolean,
+    isAnonymous: boolean,
     permissionDenied: boolean
   ): boolean {
-    return (
-      StateUser.authenticated(state) &&
-      !StateUser.isAnonymous(state) &&
-      !permissionDenied
-    );
+    return authenticated && !isAnonymous && !permissionDenied;
   }
-  @Selector() static authenticating(state: StateUserModel): boolean {
+
+  @Selector([StateUser]) static authenticating(state: StateUserModel): boolean {
     return state.authenticating;
   }
-  @Selector() static language(state: StateUserModel): string | null {
-    const user: User = StateUser.dataState(state);
 
-    return user == null ? null : user.language;
+  @Selector([StateUser.data()]) static language(form: User): string | null {
+    return form.language || null;
   }
-  @Selector() static loading(state: StateUserModel): boolean {
-    return state.authenticating || !state.initialized;
+
+  @Selector([StateUser.authenticating, StateUser.initialized]) static loading(
+    authenticating: boolean,
+    initialized: boolean
+  ): boolean {
+    return authenticating || !initialized;
   }
-  @Selector() static loadedNotAuthenticated(state: StateUserModel): boolean {
-    return !StateUser.loading(state) && !StateUser.authenticated(state);
+
+  @Selector([StateUser.loading, StateUser.authenticated])
+  static loadedNotAuthenticated(
+    loading: boolean,
+    authenticated: boolean
+  ): boolean {
+    return !loading && !authenticated;
   }
-  @Selector() static error(state: StateUserModel): Error | null {
+
+  @Selector([StateUser]) static error(state: StateUserModel): Error | null {
     return state.error;
   }
-  @Selector() static errored(state: StateUserModel): boolean {
-    return StateUser.error(state) != null;
+
+  @Selector([StateUser.error]) static errored(error: Error | null): boolean {
+    return error != null;
   }
-  @Selector() static errorAuth(state: StateUserModel): FirebaseError | null {
+
+  @Selector([StateUser]) static errorAuth(
+    state: StateUserModel
+  ): FirebaseError | null {
     return state.errorAuth;
   }
-  @Selector() static errorAuthCode(state: StateUserModel): string | undefined {
-    return StateUser.errorAuth(state)?.code;
+
+  @Selector([StateUser.errorAuth]) static errorAuthCode(
+    errorAuth: FirebaseError | null
+  ): string | undefined {
+    return errorAuth?.code;
   }
-  @Selector() static erroredAuth(state: StateUserModel): boolean {
-    return StateUser.errorAuth(state) != null;
+
+  @Selector([StateUser.errorAuth]) static erroredAuth(
+    errorAuth: FirebaseError | null
+  ): boolean {
+    return errorAuth != null;
   }
-  @Selector() static subscriptionsStatus(
-    state: StateUserModel
+
+  @Selector([StateUser.data()]) static subscriptionsStatus(
+    form: User
   ): Record<string, SubscriptionPartial> | null {
-    const user: User = StateUser.dataState(state);
-    return user == null
+    return form == null
       ? null
-      : !user.subscriptionsStatus
+      : !form.subscriptionsStatus
       ? {}
-      : user.subscriptionsStatus;
+      : form.subscriptionsStatus;
   }
-  @Selector() static notifications(
-    state: StateUserModel
+
+  @Selector([StateUser.data()]) static notifications(
+    form: User
   ): Record<string, AlertPartial> | null {
-    const user: User = StateUser.dataState(state);
-    return user == null ? null : !user.notifications ? {} : user.notifications;
+    return form == null ? null : !form.notifications ? {} : form.notifications;
   }
-  @Selector() static tokens(state: StateUserModel): Record<string, Token> {
-    return StateUser.dataState(state)?.tokens || {};
+
+  @Selector([StateUser.data()]) static tokens(
+    form: User
+  ): Record<string, Token> {
+    return form?.tokens || {};
   }
-  @Selector() static isPublisher(state: StateUserModel): boolean {
-    return StateUser.dataState(state).isPublisher || false;
+
+  @Selector([StateUser.data()]) static isPublisher(form: User): boolean {
+    return form.isPublisher || false;
   }
-  @Selector() static email(state: StateUserModel): string {
-    return StateUser.dataState(state).email;
+
+  @Selector([StateUser.data()]) static email(form: User): string | undefined {
+    return form.email;
   }
-  @Selector() static userId(state: StateUserModel): string {
-    return StateUser.dataState(state).userId;
+
+  @Selector([StateUser.data()]) static userId(form: User): string {
+    return form.userId;
   }
-  @Selector() static initialized(state: StateUserModel): boolean {
+
+  @Selector([StateUser]) static initialized(state: StateUserModel): boolean {
     return state.initialized;
   }
 
@@ -241,7 +275,6 @@ export class StateUser
     StateLocation.permissionDenied
   ])
   static ready(
-    state: StateUserModel,
     userInitialized: boolean,
     cityFound: boolean,
     cityStreamSet: boolean,
