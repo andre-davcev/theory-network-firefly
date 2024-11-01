@@ -1,6 +1,5 @@
 export enum TagEventDefault {
-  Recent = 'recent', // ascending date
+  Upcoming = 'upcoming', // ascending date
   Published = 'published', // ascending date, publisher only
-  Popular = 'popular', // ascending score
   Saved = 'saved' // ascending date
 }
