@@ -81,11 +81,13 @@ export class StateChild<
   public static override data() {
     return createSelector([this], (state: any) => StateChild.dataState(state));
   }
+
   public static offset() {
     return createSelector([this], (state: any) =>
       StateChild.offsetState(state)
     );
   }
+
   public static override finishedPaging() {
     return createSelector([this], (state: any) =>
       StateChild.finishedPagingState(state)
