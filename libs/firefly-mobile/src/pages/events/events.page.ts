@@ -4,12 +4,13 @@ import { Select, Store } from '@ngxs/store';
 import { Observable, from } from 'rxjs';
 import { switchMap, take } from 'rxjs/operators';
 
-import { StateUser } from '@firefly/shared';
+import { StateTags, StateUser, TagEvent } from '@firefly/shared';
 import { BaseComponent } from '@theory/core';
 
 import { Style } from '@capacitor/status-bar';
 import { ActionDeviceStatusBarSet, StateLocation } from '@theory/capacitor';
 
+import { Tag } from '@theory/ionic';
 import { ActionMobileAuthSelect, StateMobile } from '../../state';
 
 @Component({
@@ -21,6 +22,7 @@ export class PageEvents extends BaseComponent {
   @Select(StateUser.isUser) isUser$!: Observable<boolean>;
   @Select(StateMobile.menuOpen) menuOpen$!: Observable<boolean>;
   @Select(StateLocation.permissionDenied) locationDenied$!: Observable<boolean>;
+  @Select(StateTags.tagsEvents) tagsEvents$!: Observable<Array<Tag<TagEvent>>>;
 
   constructor(private store: Store, private menu: MenuController) {
     super();
