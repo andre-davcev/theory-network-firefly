@@ -1,4 +1,12 @@
 @use 'variables' as firefly;
 
 :host {
+  .cpt-toolbar--tags {
+    margin-top: 0.25rem;
+    --padding-top: 0;
+
+    tn-tags {
+      --padding-top: 0;
+    }
+  }
 }

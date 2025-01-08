@@ -8,6 +8,7 @@ import {
 import { ModulePipeTimestamp } from '@theory/firebase';
 import { ModuleDirectiveElevation } from '@theory/google';
 
+import { TagsComponentModule } from '@theory/ionic';
 import { ModuleComponentItemHeader } from '../../components';
 import { ModulePage } from '../../modules';
 import { PageEvents } from './events.page';
@@ -21,7 +22,8 @@ import { RoutesPageEvents } from './events.page.routes';
     ModuleComponentIconMessage,
     RouterModule.forChild(RoutesPageEvents),
     ModuleComponentButtonAdd,
-    ModulePipeTimestamp
+    ModulePipeTimestamp,
+    TagsComponentModule
   ],
 
   declarations: [PageEvents],

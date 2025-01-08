@@ -37,13 +37,16 @@ export class StateTags {
     isUser: boolean,
     isPublisher: boolean
   ): Array<Tag<TagEvent>> {
-    return isUser && isPublisher
-      ? tagsEvents
-      : tagsEvents.filter(
-          (tag: Tag<TagEvent>) =>
-            (isPublisher || tag.key !== TagEventDefault.Published) &&
-            (isUser || tag.key !== TagEventDefault.Saved)
-        );
+    const tags: Array<Tag<TagEvent>> =
+      isUser && isPublisher
+        ? tagsEvents
+        : tagsEvents.filter(
+            (tag: Tag<TagEvent>) =>
+              (isPublisher || tag.key !== TagEventDefault.Published) &&
+              (isUser || tag.key !== TagEventDefault.Saved)
+          );
+
+    return tags.map((tag: Tag<TagEvent>, index: number) => ({ ...tag, index }));
   }
 
   @Selector([StateTags.tagsListsRaw, StateUser.isUser, StateUser.isPublisher])
@@ -52,13 +55,16 @@ export class StateTags {
     isUser: boolean,
     isPublisher: boolean
   ): Array<Tag<TagList>> {
-    return isUser && isPublisher
-      ? tagsLists
-      : tagsLists.filter(
-          (tag: Tag<TagList>) =>
-            (isPublisher || tag.key !== TagListDefault.Published) &&
-            (isUser || tag.key !== TagListDefault.Subscribed)
-        );
+    const tags: Array<Tag<TagList>> =
+      isUser && isPublisher
+        ? tagsLists
+        : tagsLists.filter(
+            (tag: Tag<TagList>) =>
+              (isPublisher || tag.key !== TagListDefault.Published) &&
+              (isUser || tag.key !== TagListDefault.Subscribed)
+          );
+
+    return tags.map((tag: Tag<TagList>, index: number) => ({ ...tag, index }));
   }
 
   constructor(public translate: TranslateService) {}
@@ -76,9 +82,8 @@ export class StateTags {
         const tagsEvents: Array<Tag<TagEvent>> = [
           ...Object.values(TagEventDefault),
           ...Object.values(TagEventType)
-        ].map((key: TagEvent, index: number) => ({
+        ].map((key: TagEvent) => ({
           key,
-          index,
           display: translations[`tag.${key}`],
           disabled: false
         }));
@@ -86,9 +91,8 @@ export class StateTags {
         const tagsLists: Array<Tag<TagList>> = [
           ...Object.values(TagListDefault),
           ...Object.values(TagEventType)
-        ].map((key: TagList, index: number) => ({
+        ].map((key: TagList) => ({
           key,
-          index,
           display: translations[`tag.${key}`],
           disabled: false
         }));

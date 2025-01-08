@@ -23,6 +23,18 @@ export class StateEvents {
     return state.tag;
   }
 
+  @Selector([StateEvents.filter]) static tagKey(
+    filter: EventsFilter
+  ): TagEvent {
+    return filter.tag;
+  }
+
+  @Selector([StateEvents.tag]) static tagIndex(
+    tag: Tag<TagEvent> | null
+  ): number {
+    return tag?.index || 0;
+  }
+
   @Action(ActionEventsTagSet)
   tagSet(
     { dispatch, getState, patchState }: StateContext<StateEventsModel>,

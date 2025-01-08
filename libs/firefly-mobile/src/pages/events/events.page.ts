@@ -4,7 +4,14 @@ import { Select, Store } from '@ngxs/store';
 import { Observable, from } from 'rxjs';
 import { switchMap, take } from 'rxjs/operators';
 
-import { StateTags, StateUser, TagEvent } from '@firefly/shared';
+import {
+  ActionEventsTagSet,
+  Colors,
+  StateEvents,
+  StateTags,
+  StateUser,
+  TagEvent
+} from '@firefly/shared';
 import { BaseComponent } from '@theory/core';
 
 import { Style } from '@capacitor/status-bar';
@@ -23,6 +30,9 @@ export class PageEvents extends BaseComponent {
   @Select(StateMobile.menuOpen) menuOpen$!: Observable<boolean>;
   @Select(StateLocation.permissionDenied) locationDenied$!: Observable<boolean>;
   @Select(StateTags.tagsEvents) tagsEvents$!: Observable<Array<Tag<TagEvent>>>;
+  @Select(StateEvents.tagIndex) tagIndex$!: Observable<number>;
+
+  public Colors = Colors;
 
   constructor(private store: Store, private menu: MenuController) {
     super();
@@ -43,5 +53,9 @@ export class PageEvents extends BaseComponent {
         )
       )
       .subscribe();
+  }
+
+  public chipSelected(tag: Tag<TagEvent>): void {
+    this.store.dispatch(new ActionEventsTagSet(tag));
   }
 }
