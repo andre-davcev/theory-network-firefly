@@ -299,11 +299,14 @@ export class PageLists extends BaseComponent implements OnInit {
     const isUser: boolean = this.store.selectSnapshot(StateUser.isUser);
 
     if (isUser) {
+      const pageDetail: Pages = this.store.selectSnapshot(StateList.isOwner)
+        ? Pages.EventDetail
+        : Pages.NotificationDetail;
+
       this.store.dispatch(
-        new Navigate(
-          [Pages.Tabs, Pages.Notifications, Pages.NotificationDetail, event.id],
-          { isEvent: true }
-        )
+        new Navigate([Pages.Tabs, Pages.Lists, pageDetail, event.id], {
+          isEvent: true
+        })
       );
     } else {
       this.store.dispatch(new ActionMobileAuthSelect());

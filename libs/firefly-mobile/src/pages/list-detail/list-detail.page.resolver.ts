@@ -30,7 +30,7 @@ export class ResolverPageListDetail implements Resolve<void> {
         switchMap(() =>
           route.queryParams['id'] == null
             ? of(null)
-            : this.store.selectSnapshot(StateList.canEdit)
+            : this.store.selectSnapshot(StateList.isOwner)
             ? this.store.dispatch([
                 new ActionListEventsGetPending(),
                 new ActionListEventsGetAnonymous()

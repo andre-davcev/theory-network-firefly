@@ -97,7 +97,7 @@ export class StateList extends StateDocument<List, StateListModel> {
   }
 
   @Selector([StateList.userId, StateUser.userId])
-  static canEdit(userIdList: string, userId: string): boolean {
+  static isOwner(userIdList: string, userId: string): boolean {
     return userIdList === userId;
   }
 

@@ -71,7 +71,7 @@ export class PageListDetail extends BaseComponent implements OnInit {
   @Select(StateUserEvents.initialized())
   stateUserInitialized$!: Observable<boolean>;
   @Select(StateUser.userId) userId$!: Observable<string>;
-  @Select(StateList.canEdit) canEdit$!: Observable<boolean>;
+  @Select(StateList.isOwner) canEdit$!: Observable<boolean>;
   @Select(StateUser.isPublisher) isPublisher$!: Observable<boolean>;
 
   @ViewChild(IonInfiniteScroll)
@@ -219,6 +219,10 @@ export class PageListDetail extends BaseComponent implements OnInit {
   }
 
   public select(event: Event): void {
+    const pageDetail: Pages = this.store.selectSnapshot(StateList.isOwner)
+      ? Pages.EventDetail
+      : Pages.NotificationDetail;
+
     this.store
       .dispatch(new ActionAppLoadingShow())
       .pipe(
@@ -226,17 +230,9 @@ export class PageListDetail extends BaseComponent implements OnInit {
         switchMap(() =>
           this.store.dispatch([
             new ActionAppLoadingHide(),
-            new Navigate(
-              [
-                Pages.Tabs,
-                Pages.Notifications,
-                Pages.NotificationDetail,
-                event.id
-              ],
-              {
-                isEvent: true
-              }
-            )
+            new Navigate([Pages.Tabs, Pages.Lists, pageDetail, event.id], {
+              isEvent: true
+            })
           ])
         )
       )

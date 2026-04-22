@@ -32,6 +32,7 @@
     "wix.vscode-import-cost",
     "ms-vscode-remote.remote-ssh",
     "mhutchie.git-graph",
-    "donjayamanne.githistory"
+    "donjayamanne.githistory",
+    "bradlc.vscode-tailwindcss"
   ]
 }

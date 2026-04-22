@@ -253,7 +253,7 @@ export class StateEvent extends StateDocument<Event, StateEventModel> {
     return userIdEvent === userId;
   }
 
-  @Selector([StateEvent.draft, StateList.canEdit])
+  @Selector([StateEvent.draft, StateList.isOwner])
   static canAccept(draft: boolean, canEditList: boolean): boolean {
     return draft && canEditList;
   }
@@ -382,7 +382,7 @@ export class StateEvent extends StateDocument<Event, StateEventModel> {
     { id, isAlert }: ActionEventSetId
   ) {
     const isNew: boolean = id === CoreEnum.IdNew;
-    const isListOwner: boolean = this.store.selectSnapshot(StateList.canEdit);
+    const isListOwner: boolean = this.store.selectSnapshot(StateList.isOwner);
     const userId: string = this.store.selectSnapshot(StateUser.id());
 
     this.empty.draft = !isListOwner;

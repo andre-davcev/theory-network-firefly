@@ -8,19 +8,19 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouteReuseStrategy, RouterModule } from '@angular/router';
-import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
-import { NgxsFormPluginModule } from '@ngxs/form-plugin';
-import {
-  NgxsRouterPluginModule,
-  RouterStateSerializer
-} from '@ngxs/router-plugin';
-import { NgxsModule } from '@ngxs/store';
-// import { NgxsLoggerPluginModule } from '@ngxs/logger-plugin';
 import { Calendar } from '@ionic-native/calendar/ngx';
 import { CallNumber } from '@ionic-native/call-number/ngx';
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
+import { NgxsFormPluginModule } from '@ngxs/form-plugin';
+import { NgxsLoggerPluginModule } from '@ngxs/logger-plugin';
+import {
+  NgxsRouterPluginModule,
+  RouterStateSerializer
+} from '@ngxs/router-plugin';
+import { NgxsModule } from '@ngxs/store';
 import { NgxMapboxGLModule } from 'ngx-mapbox-gl';
 
 import { StateMobile } from '@firefly/mobile';
@@ -121,7 +121,7 @@ export function createTranslateLoader(http: HttpClient) {
     NgxsRouterPluginModule.forRoot(),
     NgxsFormPluginModule.forRoot(),
     NgxsReduxDevtoolsPluginModule.forRoot({ disabled: environment.production }),
-    // NgxsLoggerPluginModule.forRoot(),
+    NgxsLoggerPluginModule.forRoot(),
 
     NgxMapboxGLModule.withConfig({
       accessToken: environment.apis.mapbox.accessToken

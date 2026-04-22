@@ -31,10 +31,26 @@ export const RoutesPageTabs: Routes = [
         loadChildren: () => import('../lists').then((m) => m.ModulePageLists)
       },
       {
-        path: `${Pages.Lists}/${Pages.EventDetail}`,
+        path: `${Pages.Lists}/${Pages.ListDetail}`,
+        loadChildren: () =>
+          import('@firefly/mobile').then((m) => m.ModulePageListDetail)
+      },
+      {
+        path: `${Pages.Lists}/${Pages.ListDetail}/:id/${Pages.EventDetail}/:eventId`,
         loadChildren: () =>
           import('@firefly/mobile').then((m) => m.ModulePageAssetsEventsRoute)
       },
+      {
+        path: `${Pages.Lists}/${Pages.ListDetail}/:id/${Pages.NotificationDetail}/:eventId`,
+        loadChildren: () =>
+          import('@firefly/mobile').then((m) => m.ModulePageAssetsEventsRoute)
+      },
+      {
+        path: `${Pages.Lists}/${Pages.ListDetail}/:id/${Pages.EventSelector}`,
+        loadChildren: () =>
+          import('@firefly/mobile').then((m) => m.ModulePageEventSelector)
+      },
+      /*
       {
         path: `${Pages.Lists}/${Pages.AssetsLists}`,
         loadChildren: () =>
@@ -45,24 +61,14 @@ export const RoutesPageTabs: Routes = [
         loadChildren: () =>
           import('@firefly/mobile').then((m) => m.ModulePageAssetList)
       },
-      {
-        path: `${Pages.Lists}/${Pages.ListDetail}`,
-        loadChildren: () =>
-          import('@firefly/mobile').then((m) => m.ModulePageListDetail)
-      },
-      {
-        path: `${Pages.Lists}/${Pages.EventSelector}`,
-        loadChildren: () =>
-          import('@firefly/mobile').then((m) => m.ModulePageEventSelector)
-      },
-
+*/
       {
         path: Pages.Notifications,
         loadChildren: () =>
           import('../notifications').then((m) => m.ModulePageNotifications)
       },
       {
-        path: `${Pages.Notifications}/${Pages.EventDetail}`,
+        path: `${Pages.Notifications}/${Pages.EventDetail}/:id`,
         loadChildren: () =>
           import('@firefly/mobile').then((m) => m.ModulePageAssetsEventsRoute)
       },
@@ -73,12 +79,12 @@ export const RoutesPageTabs: Routes = [
           import('../calendar').then((m) => m.ModulePageCalendar)
       },
       {
-        path: `${Pages.Calendar}/${Pages.NotificationDetail}`,
+        path: `${Pages.Calendar}/${Pages.NotificationDetail}/:id`,
         loadChildren: () =>
           import('@firefly/mobile').then((m) => m.ModulePageNotificationDetail)
       },
       {
-        path: `${Pages.Calendar}/${Pages.EventDetail}`,
+        path: `${Pages.Calendar}/${Pages.EventDetail}/:id`,
         loadChildren: () =>
           import('@firefly/mobile').then((m) => m.ModulePageAssetsEventsRoute)
       },
