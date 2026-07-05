@@ -1,40 +1,33 @@
-# Theory
+# Firefly
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) using [Nrwl Nx](https://nrwl.io/nx).
+This project represents way more than a decade's worth of work in collaboration with [davidbeaton]. It started with a brainstorm when we both originally worked at [Paychex](https://www.paychex.com/) in Rochester New York. We had an idea for a better way to discover local activities and events. It started and stopped over the years, but we did create an LLC called Theory Network, and finally released the 1.0 prototype after many years of tech churn and feature refactoring.
 
-## Nrwl Extensions for Angular (Nx)
+Although it eventually was abandoned due to lack of resources, it was a huge learning experience for me. I was involved and led many aspects of the business including the Front End development, [Sketch](https://www.sketch.com/) design, [Firebase](https://firebase.google.com) database design and workflows, as well as the business administration of the company.
 
-<a href="https://nrwl.io/nx"><img src="https://preview.ibb.co/mW6sdw/nx_logo.png"></a>
+## Vision
 
-Nx is an open source toolkit for enterprise Angular applications.
+The initial vision was to provide location based alerts for local events and activities which included using a combination of Geolocation and Bluetooth Beacons. The scale of what we were trying to accomplish at the time, led us to later reduce scope to providing traditional event discovery. We also were focused on adding subscriptions to local curated event lists. This feature is very similar to what X years later introduced with its' Lists feature.
 
-Nx is designed to help you create and build enterprise grade Angular applications. It provides an opinionated approach to application project structure and patterns.
+As was mentioned, the ability to scale with limited cash and developer resources ultimately doomed the project. With modern AI tools at our disposal we might've been able to scale the company a bit easier, but we were probably a decade too early.
 
-## Quick Start & Documentation
+Later features included adding social features, adding back the geolocation and beacon location based alerting, 3D maps, and also an events reward system. The code base itself is the sign of the times. Ultimately many of the tech choices have been superceded by better technologies, but we dug deep into the frameworks that were available to us.
 
-[Watch a 5-minute video on how to get started with Nx.](http://nrwl.io/nx)
+## Architecture
 
-## Generate your first application
+Probably the main thing I learned over the decade working on this was how to migrate and refactor code into new frameworks. There was so much exciting tech introduced at this time and it was hard not to want to try the newest thing. And although it taught me a lot, it probably was one of the main reasons the project ultimately failed and why we were unable to succeed. As Guy Kawasaki said famously, "real entreprenuers ship".
 
-Run `ng generate app myapp` to generate an application. When using Nx, you can create multiple applications and libraries in the same CLI workspace. Read more [here](http://nrwl.io/nx).
+The project originally started as a native app for both Apple and Android where we hit some bottlenecks with our knowledge base. Later we found the [Cordova](https://cordova.apache.org/) framework for Hybrid web development which matched both of our skillsets better. Before there were any great mobile web frameworks, I built a pixel perfect iOS clone using standard [jQuery](https://jquery.com/).
 
-## Development server
+Just as I was finishing the [jQuery](https://jquery.com/) POC, [AngularJS](https://angularjs.org/) was released. We quickly abandoned the [jQuery](https://jquery.com/) framework as soon Ionic released their first version of the [Ionic Framework](https://ionicframework.com/) for hybrid mobile development. We then continued to follow the [Ionic Framework] through all it's iterations, including its' migration to the current [Angular](https://angular.dev/) framework, and [Capacitor](https://capacitorjs.com/) which was their homegrown [Cordova](https://cordova.apache.org/) replacement.
 
-Run `ng serve --project=myapp` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+On the data side we jumped into Google's [Firebase](https://firebase.google.com) platform which provided real time updates from their document database to our [Angular](https://angular.dev/) hybrid application. We also followed the migration over to [Firestore](https://firebase.google.com/docs/firestore) and [Firebase Cloud Functions](https://firebase.google.com/docs/functions) for database write triggers on the backend.
 
-## Code scaffolding
+For the front end architecture we originally build the [Angular](https://angular.dev/) side with the CLI, until [Nrwl Nx](https://nx.dev/) released their new at the time Google style mono repo framework. On top of the core [Nx](https://nx.dev/) workspace and [Angular](https://angular.dev/) front end, we leverated [NGXS](https://www.ngxs.io/) for state management. And although we started with [Google Maps API](https://developers.google.com/maps/documentation/javascript/overview) for our mapping framework, we eventually moved over to the [Mapbox GL](https://docs.mapbox.com/mapbox-gl-js/guides/) SDK.
 
-Run `ng generate component component-name --project=myapp` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Finally before we released our final and only iOS 1.0 prototype release, I build a small landing page for the app using [Angular](https://angular.dev/) and the [Tailwind](https://tailwindcss.com/) framework.
 
-## Build
+## Final State
 
-Run `ng build --project=myapp` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+Although [davidbeaton] later left the project, I continued to work on my 2.0 vision for the product which included the event Lists feature. The project is still runnable using the standard [Node](https://nodejs.org) tools, and was deployable to devices via the scripts available in `package.json`. Though I have removed all of the API keys and security files before making the repo public, so those will have to be replaced.
 
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-Before running the tests make sure you are serving the app via `ng serve`.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+It sadly never reached the vision we originally had hoped for, but it does represent my skillset for adapting quickly to new technologies. If the business case was still valid, leveraging modern AI tooling would've made scaling this project much easier. As I mentioned, we were a decade too early.
