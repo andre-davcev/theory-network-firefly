@@ -28,7 +28,7 @@ Finally before we released our final and only iOS 1.0 prototype release, I build
 
 ## Final State
 
-Although [David Beaton](https://github.com/davidbeaton) later left the project, I continued to work on my 2.0 vision for the product which included the event Lists feature. The project is still runnable using the standard [Node](https://nodejs.org) tools, and was deployable to devices via the scripts available in `package.json`. Though I have removed all of the API keys and security files before making the repo public, so those will have to be replaced.
+Although [David Beaton](https://github.com/davidbeaton) later left the project, I continued to work on my 2.0 vision for the product which included an enhanced event Lists feature. The project is still runnable using the standard [Node](https://nodejs.org) tools, and was deployable to devices via the scripts available in `package.json`. Though I have removed all of the API keys and security files before making the repo public, so those will have to be replaced.
 
 It sadly never reached the vision we originally had hoped for, but it does represent my skillset for adapting quickly to new technologies. If the business case was still valid, leveraging modern AI tooling would've made scaling this project much easier. As I mentioned, we were a decade too early.
 
