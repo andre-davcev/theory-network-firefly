@@ -1,6 +1,6 @@
 # Firefly
 
-This project represents way more than a decade's worth of work in collaboration with [davidbeaton]. It started with a brainstorm when we both originally worked at [Paychex](https://www.paychex.com/) in Rochester New York. We had an idea for a better way to discover local activities and events. It started and stopped over the years, but we did create an LLC called Theory Network, and finally released the 1.0 prototype after many years of tech churn and feature refactoring.
+This project represents way more than a decade's worth of work in collaboration with [David Beaton](https://github.com/davidbeaton). It started with a brainstorm when we both originally worked at [Paychex](https://www.paychex.com/) in Rochester New York. We had an idea for a better way to discover local activities and events. It started and stopped over the years, but we did create an LLC called Theory Network, and finally released the 1.0 prototype after many years of tech churn and feature refactoring.
 
 Although it eventually was abandoned due to lack of resources, it was a huge learning experience for me. I was involved and led many aspects of the business including the Front End development, [Sketch](https://www.sketch.com/) design, [Firebase](https://firebase.google.com) database design and workflows, as well as the business administration of the company.
 
@@ -28,6 +28,10 @@ Finally before we released our final and only iOS 1.0 prototype release, I build
 
 ## Final State
 
-Although [davidbeaton] later left the project, I continued to work on my 2.0 vision for the product which included the event Lists feature. The project is still runnable using the standard [Node](https://nodejs.org) tools, and was deployable to devices via the scripts available in `package.json`. Though I have removed all of the API keys and security files before making the repo public, so those will have to be replaced.
+Although [David Beaton](https://github.com/davidbeaton) later left the project, I continued to work on my 2.0 vision for the product which included the event Lists feature. The project is still runnable using the standard [Node](https://nodejs.org) tools, and was deployable to devices via the scripts available in `package.json`. Though I have removed all of the API keys and security files before making the repo public, so those will have to be replaced.
 
 It sadly never reached the vision we originally had hoped for, but it does represent my skillset for adapting quickly to new technologies. If the business case was still valid, leveraging modern AI tooling would've made scaling this project much easier. As I mentioned, we were a decade too early.
+
+## Demo
+
+Before the 1.0 prototype release, I recorded a demo of the app which can be seen [here](https://www.youtube.com/watch?v=waRJzdoUkHg). Since there won't be any future development, this is probably the best way to see the start of our vision that was sadly never fulfilled.
